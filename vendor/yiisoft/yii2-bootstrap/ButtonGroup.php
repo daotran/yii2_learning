@@ -21,6 +21,7 @@ use yii\helpers\Html;
  *     'buttons' => [
  *         ['label' => 'A'],
  *         ['label' => 'B'],
+ *         ['label' => 'C', 'visible' => false],
  *     ]
  * ]);
  *
@@ -32,8 +33,12 @@ use yii\helpers\Html;
  *     ]
  * ]);
  * ```
+ *
+ * Pressing on the button should be handled via JavaScript. See the following for details:
+ *
  * @see http://getbootstrap.com/javascript/#buttons
  * @see http://getbootstrap.com/components/#btn-groups
+ *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @since 2.0
  */
@@ -45,12 +50,14 @@ class ButtonGroup extends Widget
      *
      * - label: string, required, the button label.
      * - options: array, optional, the HTML attributes of the button.
+     * - visible: boolean, optional, whether this button is visible. Defaults to true.
      */
     public $buttons = [];
     /**
      * @var boolean whether to HTML-encode the button labels.
      */
     public $encodeLabels = true;
+
 
     /**
      * Initializes the widget.
@@ -67,8 +74,8 @@ class ButtonGroup extends Widget
      */
     public function run()
     {
-        echo Html::tag('div', $this->renderButtons(), $this->options);
         BootstrapAsset::register($this->getView());
+        return Html::tag('div', $this->renderButtons(), $this->options);
     }
 
     /**
@@ -80,14 +87,16 @@ class ButtonGroup extends Widget
         $buttons = [];
         foreach ($this->buttons as $button) {
             if (is_array($button)) {
-                $label = ArrayHelper::getValue($button, 'label');
-                $options = ArrayHelper::getValue($button, 'options');
-                $buttons[] = Button::widget([
-                    'label' => $label,
-                    'options' => $options,
-                    'encodeLabel' => $this->encodeLabels,
-                    'view' => $this->getView()
-                ]);
+                $visible = ArrayHelper::remove($button, 'visible', true);
+                if ($visible === false) {
+                    continue;
+                }
+
+                $button['view'] = $this->getView();
+                if (!isset($button['encodeLabel'])) {
+                    $button['encodeLabel'] = $this->encodeLabels;
+                }
+                $buttons[] = Button::widget($button);
             } else {
                 $buttons[] = $button;
             }

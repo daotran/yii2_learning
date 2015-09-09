@@ -49,14 +49,16 @@ class Pjax extends Widget
      */
     public $options = [];
     /**
-     * @var string the jQuery selector of the links that should trigger pjax requests.
+     * @var string|false the jQuery selector of the links that should trigger pjax requests.
      * If not set, all links within the enclosed content of Pjax will trigger pjax requests.
+     * If set to false, no code will be registered to handle links.
      * Note that if the response to the pjax request is a full page, a normal request will be sent again.
      */
     public $linkSelector;
     /**
-     * @var string the jQuery selector of the forms whose submissions should trigger pjax requests.
+     * @var string|false the jQuery selector of the forms whose submissions should trigger pjax requests.
      * If not set, all forms with `data-pjax` attribute within the enclosed content of Pjax will trigger pjax requests.
+     * If set to false, no code will be registered to handle forms.
      * Note that if the response to the pjax request is a full page, a normal request will be sent again.
      */
     public $formSelector;
@@ -84,6 +86,7 @@ class Pjax extends Widget
      * [pjax project page](https://github.com/yiisoft/jquery-pjax) for available options.
      */
     public $clientOptions;
+
 
     /**
      * @inheritdoc
@@ -136,18 +139,13 @@ class Pjax extends Widget
 
         // only need the content enclosed within this widget
         $response = Yii::$app->getResponse();
-        $level = ob_get_level();
         $response->clearOutputBuffers();
         $response->setStatusCode(200);
         $response->format = Response::FORMAT_HTML;
         $response->content = $content;
         $response->send();
 
-        // re-enable output buffer to capture content after this widget
-        for (; $level > 0; --$level) {
-            ob_start();
-            ob_implicit_flush(false);
-        }
+        Yii::$app->end();
     }
 
     /**
@@ -157,7 +155,7 @@ class Pjax extends Widget
     {
         $headers = Yii::$app->getRequest()->getHeaders();
 
-        return $headers->get('X-Pjax') && $headers->get('X-Pjax-Container') === '#' . $this->getId();
+        return $headers->get('X-Pjax') && $headers->get('X-Pjax-Container') === '#' . $this->options['id'];
     }
 
     /**
@@ -170,13 +168,21 @@ class Pjax extends Widget
         $this->clientOptions['replace'] = $this->enableReplaceState;
         $this->clientOptions['timeout'] = $this->timeout;
         $this->clientOptions['scrollTo'] = $this->scrollTo;
-        $options = Json::encode($this->clientOptions);
-        $linkSelector = Json::encode($this->linkSelector !== null ? $this->linkSelector : '#' . $id . ' a');
-        $formSelector = Json::encode($this->formSelector !== null ? $this->formSelector : '#' . $id . ' form[data-pjax]');
+        $options = Json::htmlEncode($this->clientOptions);
+        $js = '';
+        if ($this->linkSelector !== false) {
+            $linkSelector = Json::htmlEncode($this->linkSelector !== null ? $this->linkSelector : '#' . $id . ' a');
+            $js .= "jQuery(document).pjax($linkSelector, \"#$id\", $options);";
+        }
+        if ($this->formSelector !== false) {
+            $formSelector = Json::htmlEncode($this->formSelector !== null ? $this->formSelector : '#' . $id . ' form[data-pjax]');
+            $js .= "\njQuery(document).on('submit', $formSelector, function (event) {jQuery.pjax.submit(event, '#$id', $options);});";
+        }
         $view = $this->getView();
         PjaxAsset::register($view);
-        $js = "jQuery(document).pjax($linkSelector, \"#$id\", $options);";
-        $js .= "\njQuery(document).on('submit', $formSelector, function (event) {jQuery.pjax.submit(event, '#$id', $options);});";
-        $view->registerJs($js);
+
+        if ($js !== '') {
+            $view->registerJs($js);
+        }
     }
 }

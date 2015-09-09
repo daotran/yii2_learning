@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'adminEmail' => 'dao.tran@enclave.vn'
+    'adminEmail' => 'admin@example.com',
 ];

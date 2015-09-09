@@ -94,9 +94,9 @@ interface ActiveRecordInterface
     public static function isPrimaryKey($keys);
 
     /**
-     * Creates an [[ActiveQueryInterface|ActiveQuery]] instance for query purpose.
+     * Creates an [[ActiveQueryInterface]] instance for query purpose.
      *
-     * The returned [[ActiveQueryInterface|ActiveQuery]] instance can be further customized by calling
+     * The returned [[ActiveQueryInterface]] instance can be further customized by calling
      * methods defined in [[ActiveQueryInterface]] before `one()` or `all()` is called to return
      * populated ActiveRecord instances. For example,
      *
@@ -146,7 +146,7 @@ interface ActiveRecordInterface
      * // SELECT FROM customer WHERE age>30
      * $customers = Customer::find()->where('age>30')->all();
      *
-     * @return ActiveQueryInterface the newly created [[ActiveQueryInterface|ActiveQuery]] instance.
+     * @return ActiveQueryInterface the newly created [[ActiveQueryInterface]] instance.
      */
     public static function find();
 
@@ -157,11 +157,13 @@ interface ActiveRecordInterface
      *
      *  - a scalar value (integer or string): query by a single primary key value and return the
      *    corresponding record (or null if not found).
-     *  - an array of name-value pairs: query by a set of attribute values and return a single record
-     *    matching all of them (or null if not found).
+     *  - a non-associative array: query by a list of primary key values and return the
+     *    first record (or null if not found).
+     *  - an associative array of name-value pairs: query by a set of attribute values and return a single record
+     *    matching all of them (or null if not found). Note that `['id' => 1, 2]` is treated as a non-associative array.
      *
-     * Note that this method will automatically call the `one()` method and return an
-     * [[ActiveRecordInterface|ActiveRecord]] instance. For example,
+     * That this method will automatically call the `one()` method and return an [[ActiveRecordInterface|ActiveRecord]]
+     * instance. For example,
      *
      * ```php
      * // find a single customer whose primary key value is 10
@@ -178,22 +180,27 @@ interface ActiveRecordInterface
      * ```
      *
      * @param mixed $condition primary key value or a set of column values
-     * @return static ActiveRecord instance matching the condition, or null if nothing matches.
+     * @return static|null ActiveRecord instance matching the condition, or null if nothing matches.
      */
     public static function findOne($condition);
 
     /**
-     * Returns a list of active record models that match the specified primary key value or a set of column values.
+     * Returns a list of active record models that match the specified primary key value(s) or a set of column values.
      *
      * The method accepts:
      *
-     *  - a scalar value (integer or string): query by a single primary key value and return the
-     *    corresponding record (or null if not found).
-     *  - an array of name-value pairs: query by a set of attribute values and return a single record
-     *    matching all of them (or null if not found).
+     *  - a scalar value (integer or string): query by a single primary key value and return an array containing the
+     *    corresponding record (or an empty array if not found).
+     *  - a non-associative array: query by a list of primary key values and return the
+     *    corresponding records (or an empty array if none was found).
+     *    Note that an empty condition will result in an empty result as it will be interpreted as a search for
+     *    primary keys and not an empty `WHERE` condition.
+     *  - an associative array of name-value pairs: query by a set of attribute values and return an array of records
+     *    matching all of them (or an empty array if none was found). Note that `['id' => 1, 2]` is treated as
+     *    a non-associative array.
      *
-     * Note that this method will automatically call the `all()` method and return an array of
-     * [[ActiveRecordInterface|ActiveRecord]] instances. For example,
+     * This method will automatically call the `all()` method and return an array of [[ActiveRecordInterface|ActiveRecord]]
+     * instances. For example,
      *
      * ```php
      * // find the customers whose primary key value is 10
@@ -224,9 +231,9 @@ interface ActiveRecordInterface
      * Updates records using the provided attribute values and conditions.
      * For example, to change the status to be 1 for all customers whose status is 2:
      *
-     * ~~~
+     * ```php
      * Customer::updateAll(['status' => 1], ['status' => '2']);
-     * ~~~
+     * ```
      *
      * @param array $attributes attribute values (name-value pairs) to be saved for the record.
      * Unlike [[update()]] these are not going to be validated.
@@ -243,9 +250,9 @@ interface ActiveRecordInterface
      *
      * For example, to delete all customers whose status is 3:
      *
-     * ~~~
+     * ```php
      * Customer::deleteAll([status = 3]);
-     * ~~~
+     * ```
      *
      * @param array $condition the condition that matches the records that should get deleted.
      * Please refer to [[QueryInterface::where()]] on how to specify this parameter.
@@ -262,19 +269,19 @@ interface ActiveRecordInterface
      *
      * For example, to save a customer record:
      *
-     * ~~~
+     * ```php
      * $customer = new Customer; // or $customer = Customer::findOne($id);
      * $customer->name = $name;
      * $customer->email = $email;
      * $customer->save();
-     * ~~~
+     * ```
      *
-     * @param boolean $runValidation whether to perform validation before saving the record.
-     * If the validation fails, the record will not be saved to database. `false` will be returned
-     * in this case.
-     * @param array $attributeNames list of attributes that need to be saved. Defaults to null,
+     * @param boolean $runValidation whether to perform validation (calling [[validate()]])
+     * before saving the record. Defaults to `true`. If the validation fails, the record
+     * will not be saved to the database and this method will return `false`.
+     * @param array $attributeNames list of attribute names that need to be saved. Defaults to null,
      * meaning all attributes that are loaded from DB will be saved.
-     * @return boolean whether the saving succeeds
+     * @return boolean whether the saving succeeded (i.e. no validation errors occurred).
      */
     public function save($runValidation = true, $attributeNames = null);
 
@@ -290,8 +297,9 @@ interface ActiveRecordInterface
      * $customer->insert();
      * ```
      *
-     * @param boolean $runValidation whether to perform validation before saving the record.
-     * If the validation fails, the record will not be inserted into the database.
+     * @param boolean $runValidation whether to perform validation (calling [[validate()]])
+     * before saving the record. Defaults to `true`. If the validation fails, the record
+     * will not be saved to the database and this method will return `false`.
      * @param array $attributes list of attributes that need to be saved. Defaults to null,
      * meaning all attributes that are loaded from DB will be saved.
      * @return boolean whether the attributes are valid and the record is inserted successfully.
@@ -310,8 +318,9 @@ interface ActiveRecordInterface
      * $customer->update();
      * ```
      *
-     * @param boolean $runValidation whether to perform validation before saving the record.
-     * If the validation fails, the record will not be inserted into the database.
+     * @param boolean $runValidation whether to perform validation (calling [[validate()]])
+     * before saving the record. Defaults to `true`. If the validation fails, the record
+     * will not be saved to the database and this method will return `false`.
      * @param array $attributeNames list of attributes that need to be saved. Defaults to null,
      * meaning all attributes that are loaded from DB will be saved.
      * @return integer|boolean the number of rows affected, or false if validation fails
@@ -361,15 +370,15 @@ interface ActiveRecordInterface
      * to be the corresponding primary key value(s) in the other record.
      * The record with the foreign key will be saved into database without performing validation.
      *
-     * If the relationship involves a pivot table, a new row will be inserted into the
-     * pivot table which contains the primary key values from both records.
+     * If the relationship involves a junction table, a new row will be inserted into the
+     * junction table which contains the primary key values from both records.
      *
      * This method requires that the primary key value is not null.
      *
      * @param string $name the case sensitive name of the relationship.
      * @param static $model the record to be linked with the current one.
-     * @param array $extraColumns additional column values to be saved into the pivot table.
-     * This parameter is only meaningful for a relationship involving a pivot table
+     * @param array $extraColumns additional column values to be saved into the junction table.
+     * This parameter is only meaningful for a relationship involving a junction table
      * (i.e., a relation set with `[[ActiveQueryInterface::via()]]`.)
      */
     public function link($name, $model, $extraColumns = []);
@@ -387,4 +396,10 @@ interface ActiveRecordInterface
      * If true, the model containing the foreign key will be deleted.
      */
     public function unlink($name, $model, $delete = false);
+
+    /**
+     * Returns the connection used by this AR class.
+     * @return mixed the database connection used by this AR class.
+     */
+    public static function getDb();
 }

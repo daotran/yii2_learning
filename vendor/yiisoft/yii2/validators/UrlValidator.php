@@ -32,13 +32,13 @@ class UrlValidator extends Validator
     /**
      * @var array list of URI schemes which should be considered valid. By default, http and https
      * are considered to be valid schemes.
-     **/
+     */
     public $validSchemes = ['http', 'https'];
     /**
      * @var string the default URI scheme. If the input doesn't contain the scheme part, the default
      * scheme will be prepended to it (thus changing the input). Defaults to null, meaning a URL must
      * contain the scheme part.
-     **/
+     */
     public $defaultScheme;
     /**
      * @var boolean whether validation process should take into account IDN (internationalized
@@ -66,14 +66,14 @@ class UrlValidator extends Validator
     /**
      * @inheritdoc
      */
-    public function validateAttribute($object, $attribute)
+    public function validateAttribute($model, $attribute)
     {
-        $value = $object->$attribute;
+        $value = $model->$attribute;
         $result = $this->validateValue($value);
         if (!empty($result)) {
-            $this->addError($object, $attribute, $result[0], $result[1]);
+            $this->addError($model, $attribute, $result[0], $result[1]);
         } elseif ($this->defaultScheme !== null && strpos($value, '://') === false) {
-            $object->$attribute = $this->defaultScheme . '://' . $value;
+            $model->$attribute = $this->defaultScheme . '://' . $value;
         }
     }
 
@@ -111,7 +111,7 @@ class UrlValidator extends Validator
     /**
      * @inheritdoc
      */
-    public function clientValidateAttribute($object, $attribute, $view)
+    public function clientValidateAttribute($model, $attribute, $view)
     {
         if (strpos($this->pattern, '{schemes}') !== false) {
             $pattern = str_replace('{schemes}', '(' . implode('|', $this->validSchemes) . ')', $this->pattern);
@@ -122,9 +122,9 @@ class UrlValidator extends Validator
         $options = [
             'pattern' => new JsExpression($pattern),
             'message' => Yii::$app->getI18n()->format($this->message, [
-                'attribute' => $object->getAttributeLabel($attribute),
+                'attribute' => $model->getAttributeLabel($attribute),
             ], Yii::$app->language),
-            'enableIDN' => (boolean) $this->enableIDN,
+            'enableIDN' => (bool) $this->enableIDN,
         ];
         if ($this->skipOnEmpty) {
             $options['skipOnEmpty'] = 1;
@@ -138,6 +138,6 @@ class UrlValidator extends Validator
             PunycodeAsset::register($view);
         }
 
-        return 'yii.validation.url(value, messages, ' . Json::encode($options) . ');';
+        return 'yii.validation.url(value, messages, ' . Json::htmlEncode($options) . ');';
     }
 }

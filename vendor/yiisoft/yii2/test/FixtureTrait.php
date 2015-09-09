@@ -32,6 +32,7 @@ trait FixtureTrait
      */
     private $_fixtures;
 
+
     /**
      * Declares the fixtures that are needed by the current test case.
      * The return value of this method must be an array of fixture configurations. For example,
@@ -84,7 +85,7 @@ trait FixtureTrait
             $fixtures = $this->getFixtures();
         }
 
-        /** @var Fixture $fixture */
+        /* @var $fixture Fixture */
         foreach ($fixtures as $fixture) {
             $fixture->beforeLoad();
         }
@@ -108,7 +109,7 @@ trait FixtureTrait
             $fixtures = $this->getFixtures();
         }
 
-        /** @var Fixture $fixture */
+        /* @var $fixture Fixture */
         foreach ($fixtures as $fixture) {
             $fixture->beforeUnload();
         }
@@ -167,7 +168,7 @@ trait FixtureTrait
             if (!is_array($fixture)) {
                 $class = ltrim($fixture, '\\');
                 $fixtures[$name] = ['class' => $class];
-                $aliases[$class] = is_integer($name) ? $class : $name;
+                $aliases[$class] = is_int($name) ? $class : $name;
             } elseif (isset($fixture['class'])) {
                 $class = ltrim($fixture['class'], '\\');
                 $config[$class] = $fixture;

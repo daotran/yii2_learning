@@ -72,25 +72,27 @@ class LinkPager extends Widget
      */
     public $maxButtonCount = 10;
     /**
-     * @var string the label for the "next" page button. Note that this will NOT be HTML-encoded.
-     * If this property is null, the "next" page button will not be displayed.
+     * @var string|boolean the label for the "next" page button. Note that this will NOT be HTML-encoded.
+     * If this property is false, the "next" page button will not be displayed.
      */
     public $nextPageLabel = '&raquo;';
     /**
-     * @var string the text label for the previous page button. Note that this will NOT be HTML-encoded.
-     * If this property is null, the "previous" page button will not be displayed.
+     * @var string|boolean the text label for the previous page button. Note that this will NOT be HTML-encoded.
+     * If this property is false, the "previous" page button will not be displayed.
      */
     public $prevPageLabel = '&laquo;';
     /**
-     * @var string the text label for the "first" page button. Note that this will NOT be HTML-encoded.
-     * If this property is null, the "first" page button will not be displayed.
+     * @var string|boolean the text label for the "first" page button. Note that this will NOT be HTML-encoded.
+     * If it's specified as true, page number will be used as label.
+     * Default is false that means the "first" page button will not be displayed.
      */
-    public $firstPageLabel;
+    public $firstPageLabel = false;
     /**
-     * @var string the text label for the "last" page button. Note that this will NOT be HTML-encoded.
-     * If this property is null, the "last" page button will not be displayed.
+     * @var string|boolean the text label for the "last" page button. Note that this will NOT be HTML-encoded.
+     * If it's specified as true, page number will be used as label.
+     * Default is false that means the "last" page button will not be displayed.
      */
-    public $lastPageLabel;
+    public $lastPageLabel = false;
     /**
      * @var boolean whether to register link tags in the HTML header for prev, next, first and last page.
      * Defaults to `false` to avoid conflicts when multiple pagers are used on one page.
@@ -98,6 +100,11 @@ class LinkPager extends Widget
      * @see registerLinkTags()
      */
     public $registerLinkTags = false;
+    /**
+     * @var boolean Hide widget when only one page exist.
+     */
+    public $hideOnSinglePage = true;
+
 
     /**
      * Initializes the pager.
@@ -140,18 +147,22 @@ class LinkPager extends Widget
      */
     protected function renderPageButtons()
     {
-        $buttons = [];
-
         $pageCount = $this->pagination->getPageCount();
+        if ($pageCount < 2 && $this->hideOnSinglePage) {
+            return '';
+        }
+
+        $buttons = [];
         $currentPage = $this->pagination->getPage();
 
         // first page
-        if ($this->firstPageLabel !== null) {
-            $buttons[] = $this->renderPageButton($this->firstPageLabel, 0, $this->firstPageCssClass, $currentPage <= 0, false);
+        $firstPageLabel = $this->firstPageLabel === true ? '1' : $this->firstPageLabel;
+        if ($firstPageLabel !== false) {
+            $buttons[] = $this->renderPageButton($firstPageLabel, 0, $this->firstPageCssClass, $currentPage <= 0, false);
         }
 
         // prev page
-        if ($this->prevPageLabel !== null) {
+        if ($this->prevPageLabel !== false) {
             if (($page = $currentPage - 1) < 0) {
                 $page = 0;
             }
@@ -165,7 +176,7 @@ class LinkPager extends Widget
         }
 
         // next page
-        if ($this->nextPageLabel !== null) {
+        if ($this->nextPageLabel !== false) {
             if (($page = $currentPage + 1) >= $pageCount - 1) {
                 $page = $pageCount - 1;
             }
@@ -173,8 +184,9 @@ class LinkPager extends Widget
         }
 
         // last page
-        if ($this->lastPageLabel !== null) {
-            $buttons[] = $this->renderPageButton($this->lastPageLabel, $pageCount - 1, $this->lastPageCssClass, $currentPage >= $pageCount - 1, false);
+        $lastPageLabel = $this->lastPageLabel === true ? $pageCount : $this->lastPageLabel;
+        if ($lastPageLabel !== false) {
+            $buttons[] = $this->renderPageButton($lastPageLabel, $pageCount - 1, $this->lastPageCssClass, $currentPage >= $pageCount - 1, false);
         }
 
         return Html::tag('ul', implode("\n", $buttons), $this->options);

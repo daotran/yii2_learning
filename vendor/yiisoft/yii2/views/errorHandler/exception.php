@@ -1,8 +1,7 @@
 <?php
-/**
- * @var \Exception $exception
- * @var \yii\web\ErrorHandler $handler
- */
+/* @var $this \yii\web\View */
+/* @var $exception \Exception */
+/* @var $handler \yii\web\ErrorHandler */
 ?>
 <?php if (method_exists($this, 'beginPage')) $this->beginPage(); ?>
 <!doctype html>
@@ -12,12 +11,16 @@
     <meta charset="utf-8"/>
 
     <title><?php
+        $name = $handler->getExceptionName($exception);
         if ($exception instanceof \yii\web\HttpException) {
-            echo (int) $exception->statusCode . ' ' . $handler->htmlEncode($exception->getName());
-        } elseif ($exception instanceof \yii\base\Exception) {
-            echo $handler->htmlEncode($exception->getName() . ' – ' . get_class($exception));
+            echo (int) $exception->statusCode . ' ' . $handler->htmlEncode($name);
         } else {
-            echo $handler->htmlEncode(get_class($exception));
+            $name = $handler->getExceptionName($exception);
+            if ($name !== null) {
+                echo $handler->htmlEncode($name . ' – ' . get_class($exception));
+            } else {
+                echo $handler->htmlEncode(get_class($exception));
+            }
         }
     ?></title>
 
@@ -49,8 +52,11 @@ h1,h2,h3,p,img,ul li{
     font-family: Arial,sans-serif;
     color: #505050;
 }
-html,body{
-    overflow-x: hidden;
+/*corresponds to min-width of 860px for some elements (.header .footer .element ...)*/
+@media screen and (min-width: 960px) {
+    html,body{
+        overflow-x: hidden;
+    }
 }
 
 /* header */
@@ -83,6 +89,12 @@ html,body{
     font-size: 20px;
     line-height: 1.25;
 }
+.header pre{
+    margin: 10px 0;
+    overflow-y: scroll;
+    font-family: Courier, monospace;
+    font-size: 14px;
+}
 
 /* previous exceptions */
 .header .previous{
@@ -100,8 +112,8 @@ html,body{
     filter: progid:DXImageTransform.Microsoft.BasicImage(mirror=1);
     font-size: 26px;
     position: absolute;
-    margin-top: -5px;
-    margin-left: -25px;
+    margin-top: -3px;
+    margin-left: -30px;
     color: #e51717;
 }
 .header .previous h2{
@@ -126,6 +138,11 @@ html,body{
     font-size: 14px;
     color: #aaa;
 }
+.header .previous pre{
+    font-family: Courier, monospace;
+    font-size: 14px;
+    margin: 10px 0;
+}
 
 /* call stack */
 .call-stack{
@@ -138,6 +155,7 @@ html,body{
 .call-stack ul li .element-wrap{
     cursor: pointer;
     padding: 15px 0;
+    background-color: #fdfdfd;
 }
 .call-stack ul li.application .element-wrap{
     background-color: #fafafa;
@@ -168,17 +186,19 @@ html,body{
     color: #505050;
 }
 .call-stack ul li .at{
-    position: absolute;
-    right: 110px; /* 50px + 60px */
+    float: right;
+    display: inline-block;
+    width: 7em;
+    padding-left: 1em;
+    text-align: left;
     color: #aaa;
 }
 .call-stack ul li.application .at{
     color: #505050;
 }
 .call-stack ul li .line{
-    position: absolute;
-    right: 50px;
-    width: 60px;
+    display: inline-block;
+    width: 3em;
     text-align: right;
 }
 .call-stack ul li .code-wrap{
@@ -194,7 +214,7 @@ html,body{
     position: absolute;
     width: 100%;
     z-index: 100;
-    margin-top: -61px;
+    margin-top: 0;
 }
 .call-stack ul li .hover-line{
     background: none;
@@ -218,7 +238,7 @@ html,body{
     color: #aaa;
     line-height: 20px;
     font-size: 12px;
-    margin-top: -63px;
+    margin-top: 1px;
     font-family: Consolas, Courier New, monospace;
 }
 .call-stack ul li .code pre{
@@ -286,54 +306,32 @@ html,body{
 }
 
 /* highlight.js */
-pre .subst,pre .title{
-    font-weight: normal;
-    color: #505050;
-}
-pre .comment,pre .template_comment,pre .javadoc,pre .diff .header{
+.comment{
     color: #808080;
     font-style: italic;
 }
-pre .annotation,pre .decorator,pre .preprocessor,pre .doctype,pre .pi,pre .chunk,pre .shebang,pre .apache .cbracket,
-pre .prompt,pre .http .title{
-    color: #808000;
-}
-pre .tag,pre .pi{
-    background: #efefef;
-}
-pre .tag .title,pre .id,pre .attr_selector,pre .pseudo,pre .literal,pre .keyword,pre .hexcolor,pre .css .function,
-pre .ini .title,pre .css .class,pre .list .title,pre .clojure .title,pre .nginx .title,pre .tex .command,
-pre .request,pre .status{
+.keyword{
     color: #000080;
 }
-pre .attribute,pre .rules .keyword,pre .number,pre .date,pre .regexp,pre .tex .special{
+.number{
     color: #00a;
 }
-pre .number,pre .regexp{
+.number{
     font-weight: normal;
 }
-pre .string,pre .value,pre .filter .argument,pre .css .function .params,pre .apache .tag{
+.string, .value{
     color: #0a0;
 }
-pre .symbol,pre .ruby .symbol .string,pre .char,pre .tex .formula{
+.symbol, .char {
     color: #505050;
     background: #d0eded;
     font-style: italic;
 }
-pre .phpdoc,pre .yardoctag,pre .javadoctag{
+.phpdoc{
     text-decoration: underline;
 }
-pre .variable,pre .envvar,pre .apache .sqbracket,pre .nginx .built_in{
+.variable{
     color: #a00;
-}
-pre .addition{
-    background: #baeeba;
-}
-pre .deletion{
-    background: #ffc8bd;
-}
-pre .diff .change{
-    background: #bccff9;
 }
     </style>
 </head>
@@ -352,25 +350,32 @@ pre .diff .change{
                 if ($exception instanceof \yii\web\HttpException) {
                     echo '<span>' . $handler->createHttpStatusLink($exception->statusCode, $handler->htmlEncode($exception->getName())) . '</span>';
                     echo ' &ndash; ' . $handler->addTypeLinks(get_class($exception));
-                } elseif ($exception instanceof \yii\base\Exception) {
-                    echo '<span>' . $handler->htmlEncode($exception->getName()) . '</span>';
-                    echo ' &ndash; ' . $handler->addTypeLinks(get_class($exception));
                 } else {
-                    echo '<span>' . $handler->htmlEncode(get_class($exception)) . '</span>';
+                    $name = $handler->getExceptionName($exception);
+                    if ($name !== null) {
+                        echo '<span>' . $handler->htmlEncode($name) . '</span>';
+                        echo ' &ndash; ' . $handler->addTypeLinks(get_class($exception));
+                    } else {
+                        echo '<span>' . $handler->htmlEncode(get_class($exception)) . '</span>';
+                    }
                 }
             ?></h1>
         <?php endif; ?>
         <h2><?= nl2br($handler->htmlEncode($exception->getMessage())) ?></h2>
+
+        <?php if ($exception instanceof \yii\db\Exception && !empty($exception->errorInfo)) {
+            echo '<pre>Error Info: ' . print_r($exception->errorInfo, true) . '</pre>';
+        } ?>
 
         <?= $handler->renderPreviousExceptions($exception) ?>
     </div>
 
     <div class="call-stack">
         <ul>
-            <?= $handler->renderCallStackItem($exception->getFile(), $exception->getLine(), null, null, 1) ?>
+            <?= $handler->renderCallStackItem($exception->getFile(), $exception->getLine(), null, null, [], 1) ?>
             <?php for ($i = 0, $trace = $exception->getTrace(), $length = count($trace); $i < $length; ++$i): ?>
                 <?= $handler->renderCallStackItem(@$trace[$i]['file'] ?: null, @$trace[$i]['line'] ?: null,
-                    @$trace[$i]['class'] ?: null, @$trace[$i]['function'] ?: null, $i + 2) ?>
+                    @$trace[$i]['class'] ?: null, @$trace[$i]['function'] ?: null, @$trace[$i]['args'] ?: [], $i + 2) ?>
             <?php endfor; ?>
         </ul>
     </div>
@@ -443,7 +448,7 @@ window.onload = function() {
         if (!Sizzle('pre', callStackItem)[0]) {
             return;
         }
-        var top = callStackItem.offsetTop - window.pageYOffset,
+        var top = Sizzle('.code-wrap', callStackItem)[0].offsetTop - window.pageYOffset + 3,
             lines = Sizzle('pre', callStackItem)[0].getClientRects(),
             lineNumbers = Sizzle('.lines-item', callStackItem),
             errorLine = Sizzle('.error-line', callStackItem)[0],
@@ -453,10 +458,10 @@ window.onload = function() {
                 continue;
             }
             lineNumbers[i].style.top = parseInt(lines[i].top - top) + 'px';
-            hoverLines[i].style.top = parseInt(lines[i].top - top - 3) + 'px';
+            hoverLines[i].style.top = parseInt(lines[i].top - top) + 'px';
             hoverLines[i].style.height = parseInt(lines[i].bottom - lines[i].top + 6) + 'px';
             if (parseInt(callStackItem.getAttribute('data-line')) == i) {
-                errorLine.style.top = parseInt(lines[i].top - top - 3) + 'px';
+                errorLine.style.top = parseInt(lines[i].top - top) + 'px';
                 errorLine.style.height = parseInt(lines[i].bottom - lines[i].top + 6) + 'px';
             }
         }

@@ -83,6 +83,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      */
     private $_scenario = self::SCENARIO_DEFAULT;
 
+
     /**
      * Returns the validation rules for attributes.
      *
@@ -102,10 +103,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      *
      * where
      *
-     *  - attribute list: required, specifies the attributes array to be validated, for single attribute you can pass string;
+     *  - attribute list: required, specifies the attributes array to be validated, for single attribute you can pass a string;
      *  - validator type: required, specifies the validator to be used. It can be a built-in validator name,
      *    a method name of the model class, an anonymous function, or a validator class name.
-     *  - on: optional, specifies the [[scenario|scenarios]] array when the validation
+     *  - on: optional, specifies the [[scenario|scenarios]] array in which the validation
      *    rule can be applied. If this option is not set, the rule will apply to all scenarios.
      *  - additional name-value pairs can be specified to initialize the corresponding validator properties.
      *    Please refer to individual validator class API for possible properties.
@@ -118,12 +119,13 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      * function validatorName($attribute, $params)
      * ~~~
      *
-     * In the above `$attribute` refers to currently validated attribute name while `$params` contains an array of
-     * validator configuration options such as `max` in case of `string` validator. Currently validate attribute value
-     * can be accessed as `$this->[$attribute]`.
+     * In the above `$attribute` refers to the attribute currently being validated while `$params` contains an array of
+     * validator configuration options such as `max` in case of `string` validator. The value of the attribute currently being validated
+     * can be accessed as `$this->$attribute`. Note the `$` before `attribute`; this is taking the value of the variable
+     * `$attribute` and using it as the name of the property to access.
      *
      * Yii also provides a set of [[Validator::builtInValidators|built-in validators]].
-     * They each has an alias name which can be used when specifying a validation rule.
+     * Each one has an alias name which can be used when specifying a validation rule.
      *
      * Below are some examples:
      *
@@ -158,17 +160,17 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      * An active attribute is one that is subject to validation in the current scenario.
      * The returned array should be in the following format:
      *
-     * ~~~
+     * ```php
      * [
      *     'scenario1' => ['attribute11', 'attribute12', ...],
      *     'scenario2' => ['attribute21', 'attribute22', ...],
      *     ...
      * ]
-     * ~~~
+     * ```
      *
      * By default, an active attribute is considered safe and can be massively assigned.
      * If an attribute should NOT be massively assigned (thus considered unsafe),
-     * please prefix the attribute with an exclamation character (e.g. '!rank').
+     * please prefix the attribute with an exclamation character (e.g. `'!rank'`).
      *
      * The default implementation of this method will return all scenarios found in the [[rules()]]
      * declaration. A special scenario named [[SCENARIO_DEFAULT]] will contain all attributes
@@ -215,9 +217,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
         }
 
         foreach ($scenarios as $scenario => $attributes) {
-            if (empty($attributes) && $scenario !== self::SCENARIO_DEFAULT) {
-                unset($scenarios[$scenario]);
-            } else {
+            if (!empty($attributes)) {
                 $scenarios[$scenario] = array_keys($attributes);
             }
         }
@@ -286,6 +286,26 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
     }
 
     /**
+     * Returns the attribute hints.
+     *
+     * Attribute hints are mainly used for display purpose. For example, given an attribute
+     * `isPublic`, we can declare a hint `Whether the post should be visible for not logged in users`,
+     * which provides user-friendly description of the attribute meaning and can be displayed to end users.
+     *
+     * Unlike label hint will not be generated, if its explicit declaration is omitted.
+     *
+     * Note, in order to inherit hints defined in the parent class, a child class needs to
+     * merge the parent hints with child hints using functions such as `array_merge()`.
+     *
+     * @return array attribute hints (name => hint)
+     * @since 2.0.4
+     */
+    public function attributeHints()
+    {
+        return [];
+    }
+
+    /**
      * Performs the data validation.
      *
      * This method executes the validation rules applicable to the current [[scenario]].
@@ -310,28 +330,30 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      */
     public function validate($attributeNames = null, $clearErrors = true)
     {
+        if ($clearErrors) {
+            $this->clearErrors();
+        }
+
+        if (!$this->beforeValidate()) {
+            return false;
+        }
+
         $scenarios = $this->scenarios();
         $scenario = $this->getScenario();
         if (!isset($scenarios[$scenario])) {
             throw new InvalidParamException("Unknown scenario: $scenario");
         }
 
-        if ($clearErrors) {
-            $this->clearErrors();
-        }
         if ($attributeNames === null) {
             $attributeNames = $this->activeAttributes();
         }
-        if ($this->beforeValidate()) {
-            foreach ($this->getActiveValidators() as $validator) {
-                $validator->validateAttributes($this, $attributeNames);
-            }
-            $this->afterValidate();
 
-            return !$this->hasErrors();
+        foreach ($this->getActiveValidators() as $validator) {
+            $validator->validateAttributes($this, $attributeNames);
         }
+        $this->afterValidate();
 
-        return false;
+        return !$this->hasErrors();
     }
 
     /**
@@ -382,7 +404,6 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
         if ($this->_validators === null) {
             $this->_validators = $this->createValidators();
         }
-
         return $this->_validators;
     }
 
@@ -401,7 +422,6 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
                 $validators[] = $validator;
             }
         }
-
         return $validators;
     }
 
@@ -424,7 +444,6 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
                 throw new InvalidConfigException('Invalid validation rule: a rule must specify both attribute names and validator type.');
             }
         }
-
         return $validators;
     }
 
@@ -433,17 +452,22 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      * This is determined by checking if the attribute is associated with a
      * [[\yii\validators\RequiredValidator|required]] validation rule in the
      * current [[scenario]].
+     *
+     * Note that when the validator has a conditional validation applied using
+     * [[\yii\validators\RequiredValidator::$when|$when]] this method will return
+     * `false` regardless of the `when` condition because it may be called be
+     * before the model is loaded with data.
+     *
      * @param string $attribute attribute name
      * @return boolean whether the attribute is required
      */
     public function isAttributeRequired($attribute)
     {
         foreach ($this->getActiveValidators($attribute) as $validator) {
-            if ($validator instanceof RequiredValidator) {
+            if ($validator instanceof RequiredValidator && $validator->when === null) {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -479,8 +503,20 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
     public function getAttributeLabel($attribute)
     {
         $labels = $this->attributeLabels();
-
         return isset($labels[$attribute]) ? $labels[$attribute] : $this->generateAttributeLabel($attribute);
+    }
+
+    /**
+     * Returns the text hint for the specified attribute.
+     * @param string $attribute the attribute name
+     * @return string the attribute hint
+     * @see attributeHints()
+     * @since 2.0.4
+     */
+    public function getAttributeHint($attribute)
+    {
+        $hints = $this->attributeHints();
+        return isset($hints[$attribute]) ? $hints[$attribute] : '';
     }
 
     /**
@@ -568,6 +604,27 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
     public function addError($attribute, $error = '')
     {
         $this->_errors[$attribute][] = $error;
+    }
+
+    /**
+     * Adds a list of errors.
+     * @param array $items a list of errors. The array keys must be attribute names.
+     * The array values should be error messages. If an attribute has multiple errors,
+     * these errors must be given in terms of an array.
+     * You may use the result of [[getErrors()]] as the value for this parameter.
+     * @since 2.0.2
+     */
+    public function addErrors(array $items)
+    {
+        foreach ($items as $attribute => $errors) {
+            if (is_array($errors)) {
+                foreach ($errors as $error) {
+                    $this->addError($attribute, $error);
+                }
+            } else {
+                $this->addError($attribute, $errors);
+            }
+        }
     }
 
     /**
@@ -728,15 +785,17 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      * If [[formName()]] is empty, the whole `$data` array will be used to populate the model.
      * The data being populated is subject to the safety check by [[setAttributes()]].
      * @param array $data the data array. This is usually `$_POST` or `$_GET`, but can also be any valid array
-     * supplied by end user.
+     * supplied by the end user.
      * @param string $formName the form name to be used for loading the data into the model.
      * If not set, [[formName()]] will be used.
-     * @return boolean whether the model is successfully populated with some data.
+     * @return boolean whether `$data` contained some data to populate the models attributes.
+     * This only means that there was some data provided. It does not necessarily mean that any field
+     * was populated, which may be the case if none of the provided fields is safe in the current [[scenario]].
      */
     public function load($data, $formName = null)
     {
         $scope = $formName === null ? $this->formName() : $formName;
-        if ($scope == '' && !empty($data)) {
+        if ($scope === '' && !empty($data)) {
             $this->setAttributes($data);
 
             return true;
@@ -759,25 +818,32 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      * @param array $models the models to be populated. Note that all models should have the same class.
      * @param array $data the data array. This is usually `$_POST` or `$_GET`, but can also be any valid array
      * supplied by end user.
-     * @return boolean whether the model is successfully populated with some data.
+     * @param string $formName the form name to be used for loading the data into the models.
+     * If not set, it will use the [[formName()]] value of the first model in `$models`.
+     * This parameter is available since version 2.0.1.
+     * @return boolean whether at least one of the models is successfully populated.
      */
-    public static function loadMultiple($models, $data)
+    public static function loadMultiple($models, $data, $formName = null)
     {
-        /** @var Model $model */
-        $model = reset($models);
-        if ($model === false) {
-            return false;
+        if ($formName === null) {
+            /* @var $first Model */
+            $first = reset($models);
+            if ($first === false) {
+                return false;
+            }
+            $formName = $first->formName();
         }
+
         $success = false;
-        $scope = $model->formName();
         foreach ($models as $i => $model) {
-            if ($scope == '') {
-                if (isset($data[$i])) {
-                    $model->setAttributes($data[$i]);
+            /* @var $model Model */
+            if ($formName == '') {
+                if (!empty($data[$i])) {
+                    $model->load($data[$i], '');
                     $success = true;
                 }
-            } elseif (isset($data[$scope][$i])) {
-                $model->setAttributes($data[$scope][$i]);
+            } elseif (!empty($data[$formName][$i])) {
+                $model->load($data[$formName][$i], '');
                 $success = true;
             }
         }
@@ -799,7 +865,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
     public static function validateMultiple($models, $attributeNames = null)
     {
         $valid = true;
-        /** @var Model $model */
+        /* @var $model Model */
         foreach ($models as $model) {
             $valid = $model->validate($attributeNames) && $valid;
         }
@@ -819,7 +885,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      * returning the corresponding field value. The signature of the callable should be:
      *
      * ```php
-     * function ($field, $model) {
+     * function ($model, $field) {
      *     // return field value
      * }
      * ```
@@ -837,8 +903,8 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      *     'email',
      *     'firstName' => 'first_name',
      *     'lastName' => 'last_name',
-     *     'fullName' => function () {
-     *         return $this->first_name . ' ' . $this->last_name;
+     *     'fullName' => function ($model) {
+     *         return $model->first_name . ' ' . $model->last_name;
      *     },
      * ];
      * ```
@@ -860,46 +926,8 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
     }
 
     /**
-     * Determines which fields can be returned by [[toArray()]].
-     * This method will check the requested fields against those declared in [[fields()]] and [[extraFields()]]
-     * to determine which fields can be returned.
-     * @param array $fields the fields being requested for exporting
-     * @param array $expand the additional fields being requested for exporting
-     * @return array the list of fields to be exported. The array keys are the field names, and the array values
-     * are the corresponding object property names or PHP callables returning the field values.
-     */
-    protected function resolveFields(array $fields, array $expand)
-    {
-        $result = [];
-
-        foreach ($this->fields() as $field => $definition) {
-            if (is_integer($field)) {
-                $field = $definition;
-            }
-            if (empty($fields) || in_array($field, $fields, true)) {
-                $result[$field] = $definition;
-            }
-        }
-
-        if (empty($expand)) {
-            return $result;
-        }
-
-        foreach ($this->extraFields() as $field => $definition) {
-            if (is_integer($field)) {
-                $field = $definition;
-            }
-            if (in_array($field, $expand, true)) {
-                $result[$field] = $definition;
-            }
-        }
-
-        return $result;
-    }
-
-    /**
      * Returns an iterator for traversing the attributes in the model.
-     * This method is required by the interface IteratorAggregate.
+     * This method is required by the interface [[\IteratorAggregate]].
      * @return ArrayIterator an iterator for traversing the items in the list.
      */
     public function getIterator()
@@ -910,7 +938,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 
     /**
      * Returns whether there is an element at the specified offset.
-     * This method is required by the SPL interface `ArrayAccess`.
+     * This method is required by the SPL interface [[\ArrayAccess]].
      * It is implicitly called when you use something like `isset($model[$offset])`.
      * @param mixed $offset the offset to check on
      * @return boolean
@@ -922,7 +950,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 
     /**
      * Returns the element at the specified offset.
-     * This method is required by the SPL interface `ArrayAccess`.
+     * This method is required by the SPL interface [[\ArrayAccess]].
      * It is implicitly called when you use something like `$value = $model[$offset];`.
      * @param mixed $offset the offset to retrieve element.
      * @return mixed the element at the offset, null if no element is found at the offset
@@ -934,7 +962,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 
     /**
      * Sets the element at the specified offset.
-     * This method is required by the SPL interface `ArrayAccess`.
+     * This method is required by the SPL interface [[\ArrayAccess]].
      * It is implicitly called when you use something like `$model[$offset] = $item;`.
      * @param integer $offset the offset to set element
      * @param mixed $item the element value
@@ -946,7 +974,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 
     /**
      * Sets the element value at the specified offset to null.
-     * This method is required by the SPL interface `ArrayAccess`.
+     * This method is required by the SPL interface [[\ArrayAccess]].
      * It is implicitly called when you use something like `unset($model[$offset])`.
      * @param mixed $offset the offset to unset element
      */

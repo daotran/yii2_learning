@@ -10,6 +10,12 @@ namespace yii\console;
 use Yii;
 use yii\base\InvalidRouteException;
 
+// define STDIN, STDOUT and STDERR if the PHP SAPI did not define them (e.g. creating console application in web env)
+// http://php.net/manual/en/features.commandline.io-streams.php
+defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
+defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
+defined('STDERR') or define('STDERR', fopen('php://stderr', 'w'));
+
 /**
  * Application represents a console application.
  *
@@ -69,6 +75,7 @@ class Application extends \yii\base\Application
      */
     public $controller;
 
+
     /**
      * @inheritdoc
      */
@@ -96,7 +103,7 @@ class Application extends \yii\base\Application
                     if (!empty($path) && is_file($file = Yii::getAlias($path))) {
                         return require($file);
                     } else {
-                        die("The configuration file does not exist: $path\n");
+                        exit("The configuration file does not exist: $path\n");
                     }
                 }
             }
@@ -138,7 +145,7 @@ class Application extends \yii\base\Application
             return $result;
         } else {
             $response = $this->getResponse();
-            $response->exitStatus = (int) $result;
+            $response->exitStatus = $result;
 
             return $response;
         }
@@ -157,9 +164,9 @@ class Application extends \yii\base\Application
     public function runAction($route, $params = [])
     {
         try {
-            return parent::runAction($route, $params);
+            return (int)parent::runAction($route, $params);
         } catch (InvalidRouteException $e) {
-            throw new Exception(Yii::t('yii', 'Unknown command "{command}".', ['command' => $route]), 0, $e);
+            throw new Exception("Unknown command \"$route\".", 0, $e);
         }
     }
 
@@ -187,17 +194,7 @@ class Application extends \yii\base\Application
         return array_merge(parent::coreComponents(), [
             'request' => ['class' => 'yii\console\Request'],
             'response' => ['class' => 'yii\console\Response'],
+            'errorHandler' => ['class' => 'yii\console\ErrorHandler'],
         ]);
-    }
-
-    /**
-     * Registers the errorHandler component as a PHP error handler.
-     */
-    protected function registerErrorHandler(&$config)
-    {
-        if (!isset($config['components']['errorHandler']['class'])) {
-            $config['components']['errorHandler']['class'] = 'yii\\console\\ErrorHandler';
-        }
-        parent::registerErrorHandler($config);
     }
 }

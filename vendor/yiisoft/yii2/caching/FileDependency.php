@@ -7,12 +7,13 @@
 
 namespace yii\caching;
 
+use Yii;
 use yii\base\InvalidConfigException;
 
 /**
  * FileDependency represents a dependency based on a file's last modification time.
  *
- * If th last modification time of the file specified via [[fileName]] is changed,
+ * If the last modification time of the file specified via [[fileName]] is changed,
  * the dependency is considered as changed.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
@@ -21,10 +22,11 @@ use yii\base\InvalidConfigException;
 class FileDependency extends Dependency
 {
     /**
-     * @var string the name of the file whose last modification time is used to
+     * @var string the file path or path alias whose last modification time is used to
      * check if the dependency has been changed.
      */
     public $fileName;
+
 
     /**
      * Generates the data needed to determine if dependency has been changed.
@@ -39,6 +41,6 @@ class FileDependency extends Dependency
             throw new InvalidConfigException('FileDependency::fileName must be set');
         }
 
-        return @filemtime($this->fileName);
+        return @filemtime(Yii::getAlias($this->fileName));
     }
 }

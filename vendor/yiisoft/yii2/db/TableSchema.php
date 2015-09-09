@@ -47,9 +47,9 @@ class TableSchema extends Object
      *
      * ~~~
      * [
-     *	 'ForeignTableName',
-     *	 'fk1' => 'pk1',  // pk1 is in foreign table
-     *	 'fk2' => 'pk2',  // if composite foreign key
+     *  'ForeignTableName',
+     *  'fk1' => 'pk1',  // pk1 is in foreign table
+     *  'fk2' => 'pk2',  // if composite foreign key
      * ]
      * ~~~
      */
@@ -58,6 +58,7 @@ class TableSchema extends Object
      * @var ColumnSchema[] column metadata of this table. Each array element is a [[ColumnSchema]] object, indexed by column names.
      */
     public $columns = [];
+
 
     /**
      * Gets the named column metadata.
@@ -86,9 +87,7 @@ class TableSchema extends Object
      */
     public function fixPrimaryKey($keys)
     {
-        if (!is_array($keys)) {
-            $keys = [$keys];
-        }
+        $keys = (array) $keys;
         $this->primaryKey = $keys;
         foreach ($this->columns as $column) {
             $column->isPrimaryKey = false;

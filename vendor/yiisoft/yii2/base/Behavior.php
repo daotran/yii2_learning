@@ -18,12 +18,13 @@ namespace yii\base;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class Behavior extends \yii\base\Object
+class Behavior extends Object
 {
     /**
      * @var Component the owner of this behavior
      */
     public $owner;
+
 
     /**
      * Declares event handlers for the [[owner]]'s events.
@@ -35,7 +36,7 @@ class Behavior extends \yii\base\Object
      * attached to the owner; and they will be detached from the events when
      * the behavior is detached from the component.
      *
-     * The callbacks can be any of the followings:
+     * The callbacks can be any of the following:
      *
      * - method in this behavior: `'handleClick'`, equivalent to `[$this, 'handleClick']`
      * - object method: `[$object, 'handleClick']`
@@ -46,8 +47,8 @@ class Behavior extends \yii\base\Object
      *
      * ~~~
      * [
-     *	 Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
-     *	 Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
+     *     Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
+     *     Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
      * ]
      * ~~~
      *

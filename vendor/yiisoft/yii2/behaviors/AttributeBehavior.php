@@ -13,12 +13,13 @@ use yii\base\Behavior;
 use yii\base\Event;
 
 /**
- * AttributeBehavior automatically assigns a specified value to one or multiple attributes of an ActiveRecord object when certain events happen.
+ * AttributeBehavior automatically assigns a specified value to one or multiple attributes of an ActiveRecord
+ * object when certain events happen.
  *
  * To use AttributeBehavior, configure the [[attributes]] property which should specify the list of attributes
- * that need to be updated and the corresponding events that should trigger the update. For example,
- * Then configure the [[value]] property with a PHP callable whose return value will be used to assign to the current
- * attribute(s). For example,
+ * that need to be updated and the corresponding events that should trigger the update. Then configure the
+ * [[value]] property with a PHP callable whose return value will be used to assign to the current attribute(s).
+ * For example,
  *
  * ~~~
  * use yii\behaviors\AttributeBehavior;
@@ -26,7 +27,7 @@ use yii\base\Event;
  * public function behaviors()
  * {
  *     return [
- *         'attributeStamp' => [
+ *         [
  *             'class' => AttributeBehavior::className(),
  *             'attributes' => [
  *                 ActiveRecord::EVENT_BEFORE_INSERT => 'attribute1',
@@ -74,6 +75,7 @@ class AttributeBehavior extends Behavior
      */
     public $value;
 
+
     /**
      * @inheritdoc
      */
@@ -92,7 +94,10 @@ class AttributeBehavior extends Behavior
             $attributes = (array) $this->attributes[$event->name];
             $value = $this->getValue($event);
             foreach ($attributes as $attribute) {
-                $this->owner->$attribute = $value;
+                // ignore attribute names which are not string (e.g. when set by TimestampBehavior::updatedAtAttribute)
+                if (is_string($attribute)) {
+                    $this->owner->$attribute = $value;
+                }
             }
         }
     }

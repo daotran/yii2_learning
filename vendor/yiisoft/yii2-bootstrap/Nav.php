@@ -35,6 +35,7 @@ use yii\helpers\Html;
  *             ],
  *         ],
  *     ],
+ *     'options' => ['class' =>'nav-pills'], // set this to nav-tab to get tab-styled navigation
  * ]);
  * ```
  *
@@ -92,6 +93,13 @@ class Nav extends Widget
      * @see isItemActive
      */
     public $params;
+    /**
+     * @var string this property allows you to customize the HTML which is used to generate the drop down caret symbol,
+     * which is displayed next to the button text to indicate the drop down functionality.
+     * Defaults to `null` which means `<b class="caret"></b>` will be used. To disable the caret, set this property to be an empty string.
+     */
+    public $dropDownCaret;
+
 
     /**
      * Initializes the widget.
@@ -105,6 +113,9 @@ class Nav extends Widget
         if ($this->params === null) {
             $this->params = Yii::$app->request->getQueryParams();
         }
+        if ($this->dropDownCaret === null) {
+            $this->dropDownCaret = Html::tag('b', '', ['class' => 'caret']);
+        }
         Html::addCssClass($this->options, 'nav');
     }
 
@@ -113,8 +124,8 @@ class Nav extends Widget
      */
     public function run()
     {
-        echo $this->renderItems();
         BootstrapAsset::register($this->getView());
+        return $this->renderItems();
     }
 
     /**
@@ -125,7 +136,6 @@ class Nav extends Widget
         $items = [];
         foreach ($this->items as $i => $item) {
             if (isset($item['visible']) && !$item['visible']) {
-                unset($items[$i]);
                 continue;
             }
             $items[] = $this->renderItem($item);
@@ -136,8 +146,8 @@ class Nav extends Widget
 
     /**
      * Renders a widget's item.
-     * @param  string|array           $item the item to render.
-     * @return string                 the rendering result.
+     * @param string|array $item the item to render.
+     * @return string the rendering result.
      * @throws InvalidConfigException
      */
     public function renderItem($item)
@@ -148,7 +158,8 @@ class Nav extends Widget
         if (!isset($item['label'])) {
             throw new InvalidConfigException("The 'label' option is required.");
         }
-        $label = $this->encodeLabels ? Html::encode($item['label']) : $item['label'];
+        $encodeLabel = isset($item['encode']) ? $item['encode'] : $this->encodeLabels;
+        $label = $encodeLabel ? Html::encode($item['label']) : $item['label'];
         $options = ArrayHelper::getValue($item, 'options', []);
         $items = ArrayHelper::getValue($item, 'items');
         $url = ArrayHelper::getValue($item, 'url', '#');
@@ -164,17 +175,14 @@ class Nav extends Widget
             $linkOptions['data-toggle'] = 'dropdown';
             Html::addCssClass($options, 'dropdown');
             Html::addCssClass($linkOptions, 'dropdown-toggle');
-            $label .= ' ' . Html::tag('b', '', ['class' => 'caret']);
+            if ($this->dropDownCaret !== '') {
+                $label .= ' ' . $this->dropDownCaret;
+            }
             if (is_array($items)) {
                 if ($this->activateItems) {
                     $items = $this->isChildActive($items, $active);
                 }
-                $items = Dropdown::widget([
-                    'items' => $items,
-                    'encodeLabels' => $this->encodeLabels,
-                    'clientOptions' => false,
-                    'view' => $this->getView(),
-                ]);
+                $items = $this->renderDropdown($items, $item);
             }
         }
 
@@ -183,6 +191,24 @@ class Nav extends Widget
         }
 
         return Html::tag('li', Html::a($label, $url, $linkOptions) . $items, $options);
+    }
+
+    /**
+     * Renders the given items as a dropdown.
+     * This method is called to create sub-menus.
+     * @param array $items the given items. Please refer to [[Dropdown::items]] for the array structure.
+     * @param array $parentItem the parent item information. Please refer to [[items]] for the structure of this array.
+     * @return string the rendering result.
+     * @since 2.0.1
+     */
+    protected function renderDropdown($items, $parentItem)
+    {
+        return Dropdown::widget([
+            'items' => $items,
+            'encodeLabels' => $this->encodeLabels,
+            'clientOptions' => false,
+            'view' => $this->getView(),
+        ]);
     }
 
     /**
@@ -211,7 +237,7 @@ class Nav extends Widget
      * as the route for the item and the rest of the elements are the associated parameters.
      * Only when its route and parameters match [[route]] and [[params]], respectively, will a menu item
      * be considered active.
-     * @param  array   $item the menu item to be checked
+     * @param array $item the menu item to be checked
      * @return boolean whether the menu item is active
      */
     protected function isItemActive($item)
@@ -226,7 +252,9 @@ class Nav extends Widget
             }
             unset($item['url']['#']);
             if (count($item['url']) > 1) {
-                foreach (array_splice($item['url'], 1) as $name => $value) {
+                $params = $item['url'];
+                unset($params[0]);
+                foreach ($params as $name => $value) {
                     if ($value !== null && (!isset($this->params[$name]) || $this->params[$name] != $value)) {
                         return false;
                     }

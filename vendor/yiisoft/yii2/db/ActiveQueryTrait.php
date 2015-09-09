@@ -34,7 +34,7 @@ trait ActiveQueryTrait
     /**
      * Sets the [[asArray]] property.
      * @param boolean $value whether to return the query results in terms of arrays instead of Active Records.
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function asArray($value = true)
     {
@@ -53,7 +53,7 @@ trait ActiveQueryTrait
      * For example, `orders.address` means the `address` relation defined
      * in the model class corresponding to the `orders` relation.
      *
-     * The followings are some usage examples:
+     * The following are some usage examples:
      *
      * ~~~
      * // find customers together with their orders and country
@@ -77,7 +77,7 @@ trait ActiveQueryTrait
      * Customer::find()->with('orders')->with('country')->all();
      * ~~~
      *
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function with()
     {
@@ -91,7 +91,7 @@ trait ActiveQueryTrait
             $this->with = $with;
         } elseif (!empty($with)) {
             foreach ($with as $name => $value) {
-                if (is_integer($name)) {
+                if (is_int($name)) {
                     // repeating relation is fine as normalizeRelations() handle it well
                     $this->with[] = $value;
                 } else {
@@ -124,18 +124,20 @@ trait ActiveQueryTrait
                 $models[$key] = $row;
             }
         } else {
-            /** @var ActiveRecord $class */
+            /* @var $class ActiveRecord */
             $class = $this->modelClass;
             if ($this->indexBy === null) {
                 foreach ($rows as $row) {
                     $model = $class::instantiate($row);
-                    $class::populateRecord($model, $row);
+                    $modelClass = get_class($model);
+                    $modelClass::populateRecord($model, $row);
                     $models[] = $model;
                 }
             } else {
                 foreach ($rows as $row) {
                     $model = $class::instantiate($row);
-                    $class::populateRecord($model, $row);
+                    $modelClass = get_class($model);
+                    $modelClass::populateRecord($model, $row);
                     if (is_string($this->indexBy)) {
                         $key = $model->{$this->indexBy};
                     } else {
@@ -159,10 +161,11 @@ trait ActiveQueryTrait
     {
         $primaryModel = new $this->modelClass;
         $relations = $this->normalizeRelations($primaryModel, $with);
+        /* @var $relation ActiveQuery */
         foreach ($relations as $name => $relation) {
             if ($relation->asArray === null) {
                 // inherit asArray from primary query
-                $relation->asArray = $this->asArray;
+                $relation->asArray($this->asArray);
             }
             $relation->populateRelation($name, $models);
         }
@@ -177,7 +180,7 @@ trait ActiveQueryTrait
     {
         $relations = [];
         foreach ($with as $name => $callback) {
-            if (is_integer($name)) {
+            if (is_int($name)) {
                 $name = $callback;
                 $callback = null;
             }
