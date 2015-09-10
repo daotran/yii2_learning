@@ -1,0 +1,68 @@
+{{ use('/app/assets/AppAsset') }}
+{{ use('/yii/bootstrap/ActiveForm') }}
+{{ register_app_asset() }}
+{{ this.beginPage() }}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" style="overflow: hidden;" class="sb-init">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="Mosaddek">
+	<meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<link rel="shortcut icon" href="img/favicon.png">
+	<script type="text/javascript">
+    var globalVar = [];
+    {% if app.user.isGuest %}
+      globalVar['notloggedin'] = true;
+    {% else %}
+      globalVar['notloggedin'] = false;
+    {% endif %}
+    globalVar['base_url'] = '{{ app.homeUrl() }}';
+  </script>
+	<title>{{ this.title }}</title>
+	{{ this.head() }}
+	{{ html.csrfMetaTags()|raw }}
+
+	</head>
+	<body>
+		{{ this.beginBody() }}
+		<section id="container">
+			{% include "@app/views/includes/navigation.twig" %}
+			{% include "@app/views/includes/sidebar.twig" %}
+			<!--main content start-->
+			<section id="main-content">
+				<section class="wrapper">
+					{% if (app.getSession().getFlash('successMessage')) %}
+						<div class="alert alert-success fade in">
+							<button data-dismiss="alert" class="close close-sm" type="button"><i class="fa fa-times"></i></button>
+							{{ app.getSession().getFlash('successMessage') }}
+						</div>
+						{% else %}
+						{% if (app.getSession().getFlash('errorMessage')) %}
+							<div class="alert alert-block alert-danger fade in">
+								<button data-dismiss="alert" class="close close-sm" type="button"><i class="fa fa-times"></i></button>
+								{{ app.getSession().getFlash('errorMessage') }}
+							</div>
+						{% endif %}
+					{% endif %}
+					{% if app.session.hasFlash('success') %}
+						<div class="alert alert-success fade in">
+							<button data-dismiss="alert" class="close close-sm" type="button"><i class="fa fa-times"></i></button>
+							{{ app.session.getFlash('success') }}
+						</div>
+					{% endif %}
+					{{ content|raw }}
+				</section>
+			</section>
+			<!--main content end-->
+		</section>
+		{{ this.endBody() }}
+	</body>
+</html>
+{{ this.endPage() }}
