@@ -16,8 +16,13 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'layout' => 'main_posts',
+    'layout' => 'main',
     'components' => [
+        // Session
+        'session' => [
+            'class' => '\yii\web\Session',
+            'name' => '$$YII2$$LEARNING@@SELFSTUDY$$',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'yEuMvN5xJLvmmxwBFr6WPHvC-RQ_j4Cl',
@@ -25,7 +30,7 @@ $config = [
 
         // Using MemCache
         'cache' => [
-            //'class' => 'yii\caching\FileCache',
+            'class' => 'yii\caching\FileCache',
             'useMemcached'=> true,
             'class' => 'yii\caching\MemCache',
             'servers' => [
@@ -40,6 +45,7 @@ $config = [
         // User Identity
         'user' => [
             'identityClass' => 'app\models\User',
+            // enable cookie-based authentication
             'enableAutoLogin' => true,
         ],
 
@@ -76,9 +82,9 @@ $config = [
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            //'rules' => [
-            //    '<controller>/<action>/<id:\w+>' => '<controller>/<action>',
-            //],
+            'rules' => [
+                '<controller>/<action>/<id:\w+>' => '<controller>/<action>',
+            ],
         ],
         'assetManager' => [
             'forceCopy' => true
@@ -108,8 +114,23 @@ $config = [
         // Database
         'db' => require(__DIR__ . '/db.php'),
     ],
+
+    // Required authenticated users(login) when using the site
+    'as access' => [
+        'class' => 'yii\filters\AccessControl',
+        'rules' => [
+            [
+                'actions' => ['login', 'error'],
+                'allow' => true,
+            ],
+            [
+                'allow' => true,
+                'roles' => ['@'],
+            ],
+        ]
+    ],
     'params' => $params,
-    'defaultRoute' => 'posts/index',
+    'defaultRoute' => 'site/index',
 ];
 
 if (YII_ENV_DEV) {

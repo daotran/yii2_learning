@@ -20,6 +20,17 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <script type="text/javascript">
+        var globalVar = [];
+        <?php 
+            if (Yii::$app->user->isGuest) {
+                $globalVar['notloggedin'] = true;          
+            } else {
+                $globalVar['notloggedin'] = false;          
+            }
+            $globalVar['base_url'] = '{{ app.homeUrl() }}';
+        ?>    
+    </script>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -38,6 +49,13 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Posts', 'url' => ['/posts/index']],
+            /*['label' => 'Status', 
+                'items' => [
+                    ['label' => 'Create', 'url' => ['/status/create']],
+                ],
+            ],*/
+            ['label' => 'Status', 'url' => ['/status/index']],     
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ?
                 ['label' => 'Login', 'url' => ['/site/login']] :
@@ -55,6 +73,15 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        <?php if (Yii::$app->session->hasFlash('success')): ?>
+            <div class="alert alert-success">
+                <?php echo Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php elseif (Yii::$app->session->hasFlash('error')): ?>
+            <div class="alert alert-danger">
+                <?php echo Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php endif; ?>
         <?= $content ?>
     </div>
 </div>

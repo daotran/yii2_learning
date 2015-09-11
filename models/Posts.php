@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use yii\web\Controller;
 use yii\web\HttpException;
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use app\models\Posts;
 use app\models\LoginForm;
 
@@ -20,6 +22,19 @@ use app\models\LoginForm;
 class Posts extends \yii\db\ActiveRecord
 {
     public $verifyCode;
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['create_time', 'update_time'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['update_time'],
+                ],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc

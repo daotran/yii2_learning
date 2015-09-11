@@ -16,13 +16,13 @@ class PostsController extends Controller
 	public function behaviors()
 	{
 		return [
-            'access' => [
+            'as access' => [
                 'class' => AccessControl::className(),
                 // allow authenticated users to access the "save, delete and logout" actions only
-                'only' => ['save', 'delete', 'logout'],
+                'only' => ['save', 'delete'],
 				'rules' => [
 					[
-						'actions' => ['index', 'save', 'delete'],
+						'actions' => ['login', 'error', 'save', 'delete'],
 
 						// allow authenticated users
 						'allow' => true,
@@ -107,12 +107,7 @@ class PostsController extends Controller
 	 * @param int $id 	The $id of the model we want to update
 	 */
 	public function actionSave($id=NULL)
-	{
-		// Checking user logged in or not before updating Posts
-		if (Yii::$app->user->isGuest) {
-			return $this->redirect('login');
-		}
-		
+	{		
 		if ($id == NULL) {
 	    	$model = new Posts();
 	    } else {
@@ -125,8 +120,10 @@ class PostsController extends Controller
 	        
 	        if ($model->save())
 	        {
+	        	$all_posts = Posts::find()->all();
 	            Yii::$app->session->setFlash('success', 'Model has been saved');
-	            return $this->redirect('index');
+	            //return $this->redirect('posts/index');
+	            return $this->render('index', array('models' => $all_posts));
 	        }
 	        else
 	            Yii::$app->session->setFlash('error', 'Model could not be saved');
@@ -144,6 +141,7 @@ class PostsController extends Controller
 	    if (!$model->delete())
 	        Yii::$app->session->setFlash('error', 'Unable to delete model');
 
-	    return $this->redirect('index');
+	    $all_posts = Posts::find()->all();
+	    return $this->render('index', array('models' => $all_posts));
 	}
 }
