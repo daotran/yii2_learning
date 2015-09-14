@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'createdBy.email',
             'message:ntext',
             'permissions',
             'created_at',

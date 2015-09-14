@@ -25,15 +25,4 @@ class m150911_045733_create_posts_table extends Migration
     {
         $this->dropTable('{{%posts}}');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

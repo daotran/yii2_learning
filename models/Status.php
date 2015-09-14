@@ -64,4 +64,12 @@ class Status extends \yii\db\ActiveRecord
             return 'Private';        
         }
     }
+
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getCreatedBy()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'created_by']);
+    }
 }

@@ -23,6 +23,18 @@ class StatusController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index','create','update','view'],
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied
+                ],
+            ],            
         ];
     }
 
@@ -61,8 +73,9 @@ class StatusController extends Controller
     public function actionCreate()
     {
         $model = new Status();
- 
+        
         if ($model->load(Yii::$app->request->post())) {
+            $model->created_by = Yii::$app->user->getId();
             $model->created_at = time();
             $model->updated_at = time();
             if ($model->save()) {             
@@ -70,7 +83,7 @@ class StatusController extends Controller
             } 
         } 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 

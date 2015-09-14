@@ -17,6 +17,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'layout' => 'main',
+    'language' => 'en', // by default
     'components' => [
         // Session
         'session' => [
@@ -44,7 +45,7 @@ $config = [
 
         // User Identity
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Users',
             // enable cookie-based authentication
             'enableAutoLogin' => true,
         ],
@@ -116,7 +117,7 @@ $config = [
     ],
 
     // Required authenticated users(login) when using the site
-    'as access' => [
+    /*'as access' => [
         'class' => 'yii\filters\AccessControl',
         'rules' => [
             [
@@ -128,7 +129,7 @@ $config = [
                 'roles' => ['@'],
             ],
         ]
-    ],
+    ],*/
     'params' => $params,
     'defaultRoute' => 'site/index',
 ];

@@ -38,7 +38,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => Yii::t('app', 'My Company'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -47,20 +47,21 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Posts', 'url' => ['/posts/index']],
+            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
+            ['label' => Yii::t('app', 'About'), 'url' => ['/site/about']],
+            ['label' => Yii::t('app', 'Posts'), 'url' => ['/posts/index']],
+            ['label' => Yii::t('app', 'Users'), 'url' => ['/users/index']],
             /*['label' => 'Status', 
                 'items' => [
                     ['label' => 'Create', 'url' => ['/status/create']],
                 ],
             ],*/
-            ['label' => 'Status', 'url' => ['/status/index']],     
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => Yii::t('app', 'Status'), 'url' => ['/status/index']],     
+            ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ?
-                ['label' => 'Login', 'url' => ['/site/login']] :
+                ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']] :
                 [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'label' => Yii::t('app', 'Logout (') . Yii::$app->user->identity->username . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ],
