@@ -25,15 +25,4 @@ class m150911_044255_create_status_table extends Migration
     {
         $this->dropTable('{{%status}}');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

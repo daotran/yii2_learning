@@ -44,6 +44,7 @@ class StatusController extends Controller
      */
     public function actionIndex()
     {
+        //dump(Yii::$app->request->queryParams);
         $searchModel = new StatusSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

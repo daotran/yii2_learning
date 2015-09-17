@@ -62,11 +62,37 @@ class UsersController extends Controller
     {
         $model = new Users();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+
+            // Checking user email already existed in database or not
+            $obj = $model->findByUsername($data['Users']['email']);
+            if (isset($obj->attributes)) {
+                Yii::$app->session->setFlash('error', "There is already an account with this email address, please try again.!");
+                return $this->render('create', [
+                    'model' => $model,                
+                ]);
+            }
+
+            $model->status = 1;
+            $model->setPassword($data['Users']['password']);
+            $model->generateAuthKey();
+            $model->generatePasswordResetToken();
+            //$model->password = Yii::$app->security->generatePasswordHash($data['Users']['password']);
+            //$model->auth_key = Yii::$app->security->generateRandomString();
+            //$model->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+
+            if ($model->save()) {
+                // the following three lines were added in order for all signed up users to become authors
+                $auth = Yii::$app->authManager;
+                $authorRole = $auth->getRole('author');
+                $auth->assign($authorRole, $model->getId());
+                Yii::$app->session->setFlash('success',Yii::t('app','You have created successfully'));
+                return $this->redirect(['index']);
+            }
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model,                
             ]);
         }
     }
@@ -81,11 +107,20 @@ class UsersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+            $model->status = 1;
+            $model->password = Yii::$app->security->generatePasswordHash($data['Users']['password']);
+            $model->auth_key = Yii::$app->security->generateRandomString();
+            $model->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success',Yii::t('app','You have updated successfully'));
+                return $this->redirect(['index']);
+            }
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model' => $model,                
             ]);
         }
     }

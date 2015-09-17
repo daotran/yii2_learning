@@ -28,7 +28,7 @@ class LoginForm extends Model
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+            ['password', 'validatePassword'],            
         ];
     }
 
@@ -44,8 +44,15 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
 
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            if(!$user) {
+                $this->addError('login', 'This user does not exist on the system.');
+                Yii::$app->session->setFlash('error', "This user does not exist on the system.");
+            } elseif (!$user->validatePassword($this->password)) { // validate if matching username and password
+                $this->addError('login', 'Incorrect password.');
+                Yii::$app->session->setFlash('error', "Incorrect password.");
+            } elseif (!$user->getLoginAccess()) { // check login role
+                $this->addError('login', "You don't have right to login on this system.");
+                Yii::$app->session->setFlash('error', "You don't have right to login on this system.");
             }
         }
     }

@@ -66,32 +66,41 @@ return array (
       '@yii/twig' => $vendorDir . '/yiisoft/yii2-twig',
     ),
   ),
-  'yiisoft/yii2-jui' => 
+  'rmrevin/yii2-fontawesome' => 
   array (
-    'name' => 'yiisoft/yii2-jui',
-    'version' => '2.0.4.0',
+    'name' => 'rmrevin/yii2-fontawesome',
+    'version' => '2.12.0.0',
     'alias' => 
     array (
-      '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
+      '@rmrevin/yii/fontawesome' => $vendorDir . '/rmrevin/yii2-fontawesome',
     ),
   ),
-  'yiisoft/yii2-authclient' => 
+  'deesoft/yii2-adminlte' => 
   array (
-    'name' => 'yiisoft/yii2-authclient',
-    'version' => '2.0.4.0',
+    'name' => 'deesoft/yii2-adminlte',
+    'version' => '1.0.0.0',
     'alias' => 
     array (
-      '@yii/authclient' => $vendorDir . '/yiisoft/yii2-authclient',
+      '@dee/adminlte' => $vendorDir . '/deesoft/yii2-adminlte',
     ),
   ),
-  'dektrium/yii2-user' => 
+  'deesoft/yii2-angular' => 
   array (
-    'name' => 'dektrium/yii2-user',
-    'version' => '0.9.4.0',
+    'name' => 'deesoft/yii2-angular',
+    'version' => '1.3.0.0',
     'alias' => 
     array (
-      '@dektrium/user' => $vendorDir . '/dektrium/yii2-user',
+      '@dee/angular' => $vendorDir . '/deesoft/yii2-angular',
     ),
-    'bootstrap' => 'dektrium\\user\\Bootstrap',
+    'bootstrap' => 'dee\\angular\\Bootstrap',
+  ),
+  'mdmsoft/yii2-admin' => 
+  array (
+    'name' => 'mdmsoft/yii2-admin',
+    'version' => '3.2.0.0',
+    'alias' => 
+    array (
+      '@mdm/admin' => $vendorDir . '/mdmsoft/yii2-admin',
+    ),
   ),
 );

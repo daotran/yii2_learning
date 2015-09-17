@@ -15,7 +15,10 @@ function dump($var = '',$exit = true)
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'admin', // required
+    ],
     'layout' => 'main',
     'language' => 'en', // by default
     'components' => [
@@ -31,7 +34,7 @@ $config = [
 
         // Using MemCache
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            //'class' => 'yii\caching\FileCache',
             'useMemcached'=> true,
             'class' => 'yii\caching\MemCache',
             'servers' => [
@@ -90,7 +93,7 @@ $config = [
         'assetManager' => [
             'forceCopy' => true
             //'bundles' => require(__DIR__ . '/compressed_asset.php'),
-        ],
+        ],        
 
         // Mailer
         'mailer' => [
@@ -110,16 +113,52 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],
+        ],        
 
         // Database
         'db' => require(__DIR__ . '/db.php'),
+
+        // Config yii2-admin
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\PhpManager'
+            'defaultRoles' => ['admin', 'author', 'guest', 'user', 'editor'],
+            'cache' => 'yii\caching\FileCache',
+            'itemTable' => 'auth_item',
+            'itemChildTable' => 'auth_item_child',
+            'assignmentTable' => 'auth_assignment',
+            'ruleTable' => 'auth_rule',
+        ],
+    ],
+
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+        ],
+        'layout' => 'left-menu', // avaliable value 'left-menu', 'right-menu' and 'top-menu'
+            'controllerMap' => [
+                 'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'app\models\Users',
+                    'idField' => 'user_id'
+                ]
+            ],
+            'menus' => [
+                'assignment' => [
+                    'label' => 'Grand Access' // change label
+                ],
+                'route' => null, // disable menu
+            ],
     ],
 
     // Required authenticated users(login) when using the site
-    /*'as access' => [
-        'class' => 'yii\filters\AccessControl',
-        'rules' => [
+    'as access' => [
+        //'class' => 'yii\filters\AccessControl',
+        'class' => 'mdm\admin\classes\AccessControl',
+        'allowActions' => [
+            'admin/*', // add or remove allowed actions to this list
+            'site/*',
+        ],
+        /*'rules' => [
             [
                 'actions' => ['login', 'error'],
                 'allow' => true,
@@ -128,8 +167,8 @@ $config = [
                 'allow' => true,
                 'roles' => ['@'],
             ],
-        ]
-    ],*/
+        ],*/
+    ],
     'params' => $params,
     'defaultRoute' => 'site/index',
 ];

@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'createdBy.email',
             'message:ntext',
             'permissions',
-            'created_at',
-            'updated_at',
+            'created_at:date',
+            'updated_at:date',
         ],
     ]) ?>
 

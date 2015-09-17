@@ -9,6 +9,8 @@ use yii\helpers\Html;
 $this->title = Yii::t('app', 'Create Users');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+ini_get('display_errors');
 ?>
 <div class="users-create">
 

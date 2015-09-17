@@ -16,16 +16,21 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['login', 'logout', 'signup'], //ACF should only be applied to the login, logout and signup actions.
                 'rules' => [
                     [
-                        'actions' => ['logout'],
                         'allow' => true,
+                        'actions' => ['login', 'signup'], //Allow all guest (not yet authenticated) users to access the login and signup actions.
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['logout'], //Allow authenticated users to access the logout action.
                         'roles' => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
+            'verbs' => [ //Pecifies which request method (e.g. GET, POST) this rule matches. The comparison is case-insensitive.
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],

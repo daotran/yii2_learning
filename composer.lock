@@ -4,8 +4,192 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3359d32acdf9f598ec9da3f50b300964",
+    "hash": "2177f492493fb7e999959fb2e76da3e3",
     "packages": [
+        {
+            "name": "bower-asset/adminlte",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/almasaeed2010/AdminLTE.git",
+                "reference": "81aa879d3a4489213888e24975b073c7478f0447"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/81aa879d3a4489213888e24975b073c7478f0447",
+                "reference": "81aa879d3a4489213888e24975b073c7478f0447",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "index2.html",
+                    "dist/css/AdminLTE.css",
+                    "dist/js/app.js",
+                    "build/less/AdminLTE.less"
+                ],
+                "bower-asset-ignore": [
+                    "/.*",
+                    "node_modules",
+                    "bower_components",
+                    "composer.json",
+                    "documentation"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Admin dashboard and control panel template",
+            "keywords": [
+                "admin",
+                "backend",
+                "bootstrap",
+                "css",
+                "html",
+                "js",
+                "responsive",
+                "template",
+                "theme"
+            ]
+        },
+        {
+            "name": "bower-asset/angular",
+            "version": "v1.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular/bower-angular.git",
+                "reference": "3809d44e5279e94a0596d5bc216d921f34f8ab2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular/bower-angular/zipball/3809d44e5279e94a0596d5bc216d921f34f8ab2a",
+                "reference": "3809d44e5279e94a0596d5bc216d921f34f8ab2a",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./angular.js",
+                "bower-asset-ignore": []
+            }
+        },
+        {
+            "name": "bower-asset/angular-bootstrap",
+            "version": "0.13.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular-ui/bootstrap-bower.git",
+                "reference": "4fa8d643acc1829e77984dc004ceb52791c50592"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular-ui/bootstrap-bower/zipball/4fa8d643acc1829e77984dc004ceb52791c50592",
+                "reference": "4fa8d643acc1829e77984dc004ceb52791c50592",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": ">=1.3.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./ui-bootstrap-tpls.js"
+                ],
+                "bower-asset-ignore": []
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Native AngularJS (Angular) directives for Bootstrap.",
+            "keywords": [
+                "angular",
+                "angular-ui",
+                "bootstrap"
+            ]
+        },
+        {
+            "name": "bower-asset/angular-resource",
+            "version": "v1.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular/bower-angular-resource.git",
+                "reference": "1b00ddb9576b35da312fc044f114e4ec31bc7377"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular/bower-angular-resource/zipball/1b00ddb9576b35da312fc044f114e4ec31bc7377",
+                "reference": "1b00ddb9576b35da312fc044f114e4ec31bc7377",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": "1.4.5"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./angular-resource.js",
+                "bower-asset-ignore": []
+            }
+        },
+        {
+            "name": "bower-asset/angular-route",
+            "version": "v1.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular/bower-angular-route.git",
+                "reference": "73164ac5aa58a3b433463977825d738bdccc1202"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular/bower-angular-route/zipball/73164ac5aa58a3b433463977825d738bdccc1202",
+                "reference": "73164ac5aa58a3b433463977825d738bdccc1202",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": "1.4.5"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./angular-route.js",
+                "bower-asset-ignore": []
+            }
+        },
+        {
+            "name": "bower-asset/angular-validation",
+            "version": "v1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/huei90/angular-validation.git",
+                "reference": "f4a14536035aa5cc644ee8f562ec10a294f0bf08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/huei90/angular-validation/zipball/f4a14536035aa5cc644ee8f562ec10a294f0bf08",
+                "reference": "f4a14536035aa5cc644ee8f562ec10a294f0bf08",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "dist/angular-validation.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Client-side Validation for AngularJS",
+            "keywords": [
+                "angular",
+                "angular validation",
+                "angularjs",
+                "client-side",
+                "validation",
+                "validator"
+            ]
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.5",
@@ -56,6 +240,43 @@
             ]
         },
         {
+            "name": "bower-asset/fontawesome",
+            "version": "v4.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "e554555d73a44e0a7d11b0361ad7a5325a5f551c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/e554555d73a44e0a7d11b0361ad7a5325a5f551c",
+                "reference": "e554555d73a44e0a7d11b0361ad7a5325a5f551c",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "less/font-awesome.less",
+                    "scss/font-awesome.scss"
+                ],
+                "bower-asset-ignore": [
+                    "*/.*",
+                    "*.json",
+                    "src",
+                    "*.yml",
+                    "Gemfile",
+                    "Gemfile.lock",
+                    "*.md"
+                ]
+            },
+            "license": [
+                "OFL-1.1",
+                "MIT",
+                "CC-BY-3.0"
+            ],
+            "description": "Font Awesome"
+        },
+        {
             "name": "bower-asset/jquery",
             "version": "2.1.4",
             "source": {
@@ -98,31 +319,6 @@
                 "jquery",
                 "library"
             ]
-        },
-        {
-            "name": "bower-asset/jquery-ui",
-            "version": "1.11.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/components/jqueryui.git",
-                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/components/jqueryui/zipball/c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
-                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.6"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "jquery-ui.js"
-                ],
-                "bower-asset-ignore": []
-            }
         },
         {
             "name": "bower-asset/jquery.inputmask",
@@ -298,68 +494,104 @@
             "time": "2015-03-06 05:28:07"
         },
         {
-            "name": "dektrium/yii2-user",
-            "version": "v0.9.4",
+            "name": "deesoft/yii2-adminlte",
+            "version": "1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/dektrium/yii2-user.git",
-                "reference": "891fe6c3957bde7f3a7893775fd304fc84140599"
+                "url": "https://github.com/deesoft/yii2-adminlte.git",
+                "reference": "a518e361faee1ece1b9ee849a621c64fe922d206"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dektrium/yii2-user/zipball/891fe6c3957bde7f3a7893775fd304fc84140599",
-                "reference": "891fe6c3957bde7f3a7893775fd304fc84140599",
+                "url": "https://api.github.com/repos/deesoft/yii2-adminlte/zipball/a518e361faee1ece1b9ee849a621c64fe922d206",
+                "reference": "a518e361faee1ece1b9ee849a621c64fe922d206",
                 "shasum": ""
             },
             "require": {
+                "bower-asset/adminlte": "~2.0",
+                "rmrevin/yii2-fontawesome": "~2.0",
                 "yiisoft/yii2": "~2.0",
-                "yiisoft/yii2-authclient": "~2.0",
-                "yiisoft/yii2-bootstrap": "~2.0",
-                "yiisoft/yii2-jui": "~2.0",
-                "yiisoft/yii2-swiftmailer": "~2.0"
-            },
-            "require-dev": {
-                "codeception/aspect-mock": "*",
-                "codeception/specify": "*",
-                "codeception/verify": "*",
-                "yiisoft/yii2-codeception": "~2.0"
+                "yiisoft/yii2-bootstrap": "~2.0"
             },
             "type": "yii2-extension",
             "extra": {
-                "bootstrap": "dektrium\\user\\Bootstrap",
                 "branch-alias": {
-                    "dev-master": "0.9.x-dev",
-                    "dev-develop": "1.0.x-dev"
-                },
-                "asset-installer-paths": {
-                    "npm-asset-library": "vendor/npm",
-                    "bower-asset-library": "vendor/bower"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "dektrium\\user\\": ""
+                    "dee\\adminlte\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
-                    "name": "Dmitry Erofeev",
-                    "email": "dmeroff@gmail.com",
-                    "homepage": "http://dmeroff.ru"
+                    "name": "Misbahul Munir",
+                    "email": "misbahuldmunir@gmail.com"
                 }
             ],
-            "description": "Flexible user registration and authentication module for Yii2",
+            "description": "yii2 adminlte theme",
             "keywords": [
-                "User management",
-                "dektrium",
-                "yii2",
-                "yii2-user"
+                "AdminLTE",
+                "bootstrap",
+                "css"
             ],
-            "time": "2015-04-06 09:21:39"
+            "time": "2015-07-27 12:27:04"
+        },
+        {
+            "name": "deesoft/yii2-angular",
+            "version": "1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/deesoft/yii2-angular.git",
+                "reference": "97031eb540ac337054f8f8b2acd1f3f03057cadb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/deesoft/yii2-angular/zipball/97031eb540ac337054f8f8b2acd1f3f03057cadb",
+                "reference": "97031eb540ac337054f8f8b2acd1f3f03057cadb",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": "~1.3",
+                "bower-asset/angular-bootstrap": "~0.13",
+                "bower-asset/angular-resource": "~1.3",
+                "bower-asset/angular-route": "~1.3",
+                "bower-asset/angular-validation": "~1.3",
+                "yiisoft/yii2": ">=2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "dee\\angular\\Bootstrap",
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dee\\angular\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Misbahul Munir",
+                    "email": "misbahuldmunir@gmail.com"
+                }
+            ],
+            "description": "Yii2 angular extension",
+            "keywords": [
+                "angularjs",
+                "yii2"
+            ],
+            "time": "2015-09-03 14:43:37"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -404,6 +636,109 @@
                 "html"
             ],
             "time": "2013-11-30 08:25:19"
+        },
+        {
+            "name": "mdmsoft/yii2-admin",
+            "version": "3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mdmsoft/yii2-admin.git",
+                "reference": "8d1e133c6efaf013d84692673846824626b62843"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/8d1e133c6efaf013d84692673846824626b62843",
+                "reference": "8d1e133c6efaf013d84692673846824626b62843",
+                "shasum": ""
+            },
+            "require": {
+                "deesoft/yii2-adminlte": "~1.0",
+                "deesoft/yii2-angular": "~1.3",
+                "yiisoft/yii2": ">=2.0.6"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "mdm\\admin\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Misbahul Munir",
+                    "email": "misbahuldmunir@gmail.com"
+                }
+            ],
+            "description": "RBAC Auth manager for Yii2 ",
+            "keywords": [
+                "admin",
+                "angularjs",
+                "auth",
+                "rbac",
+                "rest",
+                "yii"
+            ],
+            "time": "2015-09-05 07:07:03"
+        },
+        {
+            "name": "rmrevin/yii2-fontawesome",
+            "version": "2.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-fontawesome.git",
+                "reference": "51d33ec9d1d7edab2166f1d42668c1bc8d28c068"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/51d33ec9d1d7edab2166f1d42668c1bc8d28c068",
+                "reference": "51d33ec9d1d7edab2166f1d42668c1bc8d28c068",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/fontawesome": "4.4.*",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\fontawesome\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Revin",
+                    "email": "xgismox@gmail.com",
+                    "homepage": "http://rmrevin.ru/"
+                }
+            ],
+            "description": "Asset Bundle for Yii2 with Font Awesome",
+            "keywords": [
+                "asset",
+                "awesome",
+                "bundle",
+                "font",
+                "yii"
+            ],
+            "time": "2015-08-15 16:50:16"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -547,54 +882,6 @@
             "time": "2015-08-05 22:00:30"
         },
         {
-            "name": "yiisoft/yii2-authclient",
-            "version": "2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-authclient.git",
-                "reference": "cbe801a7d8bb477be15cb0fbdaa75ca5bdfeb91b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-authclient/zipball/cbe801a7d8bb477be15cb0fbdaa75ca5bdfeb91b",
-                "reference": "cbe801a7d8bb477be15cb0fbdaa75ca5bdfeb91b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "yiisoft/yii2": ">=2.0.4"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\authclient\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Paul Klimov",
-                    "email": "klimov.paul@gmail.com"
-                }
-            ],
-            "description": "External authentication via OAuth and OpenID for the Yii framework",
-            "keywords": [
-                "OpenId",
-                "auth",
-                "oauth",
-                "yii2"
-            ],
-            "time": "2015-05-10 22:07:56"
-        },
-        {
             "name": "yiisoft/yii2-bootstrap",
             "version": "2.0.4",
             "source": {
@@ -690,56 +977,6 @@
                 "yii2"
             ],
             "time": "2015-03-01 06:22:44"
-        },
-        {
-            "name": "yiisoft/yii2-jui",
-            "version": "2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-jui.git",
-                "reference": "ce16f29cca654702c2ee500ccad9657a2d2e6a09"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/ce16f29cca654702c2ee500ccad9657a2d2e6a09",
-                "reference": "ce16f29cca654702c2ee500ccad9657a2d2e6a09",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery-ui": "1.11.*@stable",
-                "yiisoft/yii2": ">=2.0.4"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                },
-                "asset-installer-paths": {
-                    "npm-asset-library": "vendor/npm",
-                    "bower-asset-library": "vendor/bower"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\jui\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com"
-                }
-            ],
-            "description": "The Jquery UI extension for the Yii framework",
-            "keywords": [
-                "jQuery UI",
-                "yii2"
-            ],
-            "time": "2015-05-10 22:09:43"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -908,16 +1145,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "204a6c94907c2c2225322c267e09adbb2b1c04fd"
+                "reference": "b7fc2469fa009897871fb95b68237286fc54a5ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/204a6c94907c2c2225322c267e09adbb2b1c04fd",
-                "reference": "204a6c94907c2c2225322c267e09adbb2b1c04fd",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b7fc2469fa009897871fb95b68237286fc54a5ad",
+                "reference": "b7fc2469fa009897871fb95b68237286fc54a5ad",
                 "shasum": ""
             },
             "require": {
@@ -965,7 +1202,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-09-13 17:12:38"
+            "time": "2015-09-15 06:50:16"
         },
         {
             "name": "yiisoft/yii2-codeception",

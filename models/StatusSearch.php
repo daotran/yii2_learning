@@ -41,7 +41,11 @@ class StatusSearch extends Status
      */
     public function search($params)
     {
-        $query = Status::find();
+        $current_user_loggedin = Yii::$app->user->getId();
+        $query = Status::find()
+                            ->with('createdBy')
+                            ->where(['created_by' => $current_user_loggedin]);
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,7 +60,6 @@ class StatusSearch extends Status
         }
 
         $query->andFilterWhere([
-            //'id' => $this->id,
             'permissions' => $this->permissions,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
