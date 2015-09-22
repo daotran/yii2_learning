@@ -152,13 +152,13 @@ $config = [
 
     // Required authenticated users(login) when using the site
     'as access' => [
-        //'class' => 'yii\filters\AccessControl',
-        'class' => 'mdm\admin\classes\AccessControl',
-        'allowActions' => [
-            'admin/*', // add or remove allowed actions to this list
-            'site/*',
-        ],
-        /*'rules' => [
+        'class' => 'yii\filters\AccessControl',
+        //'class' => 'mdm\admin\classes\AccessControl',
+        //'allowActions' => [
+        //    'admin/*', // add or remove allowed actions to this list
+        //    'site/*',
+        //],
+        'rules' => [
             [
                 'actions' => ['login', 'error'],
                 'allow' => true,
@@ -167,7 +167,7 @@ $config = [
                 'allow' => true,
                 'roles' => ['@'],
             ],
-        ],*/
+        ],
     ],
     'params' => $params,
     'defaultRoute' => 'site/index',

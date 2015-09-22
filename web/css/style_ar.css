@@ -1,0 +1,1544 @@
+/**
+ * Purpose: Apply Arabic style for the whole website which need to go with '.ar_body'
+ **/
+
+body.ar_body {
+    direction: rtl;
+}
+
+/*========================== Header =============================*/
+.ar_body .header .luxury a.logo{
+    background: url("../images/logo_ar.jpg") no-repeat;
+    width: 386px;
+    height: 35px;
+    display: block;
+}
+.ar_body .location {
+    margin-right: 2%;
+    margin-left: 0;
+}
+.ar_body .language{
+    margin-right:-3%;
+}
+.ar_body .locations {
+    margin-right: 45px;
+}
+
+
+.ar_body .upper-header ul{
+
+}
+.ar_body .upper-header ul li, .ar_body .luxury{
+    float: right;
+}
+.ar_body .locations ul li:first-child {
+    padding: 22px 22px 0px 0;
+}
+.ar_body .locations ul li {
+    padding: 20px 22px 0px 0;
+}
+.ar_body .locations ul li a {
+    padding-right: 24px;
+    padding-left: 0;
+    background-position: right 0px;
+}
+.ar_body .upper-header ul li{
+    background-position: right 0px;
+}
+.ar_body .upper-header ul li span {
+    padding-right: 19px;
+    padding-left: 0;
+    float: left;
+}
+.ar_body .upper-header ul li a{
+    float: right;
+    font-size:15px;
+}
+.ar_body .authenticity {
+    margin-right: 12%;
+    margin-left: 0 !important;
+}
+.ar_body .international {
+    margin-right: 18px;
+}
+.ar_body .verified {
+    margin-right: 20px;
+    margin-left: 0;
+}
+.ar_body .upper-header .log-buttons{
+    margin-right: 10%;
+    margin-left: 0;
+    width:180px;
+}
+.ar_body a.cart{
+    float: right;
+    margin-right: 14px;
+    margin-left: 0;
+}
+.ar_body .address {
+    float: right;
+    padding-right: 36px;
+    padding-left: 0;
+}
+.ar_body .search {
+    float: left;
+    margin-left: 75px;
+    margin-top: -6%;
+}
+
+.ar_body .search .button_div {
+    margin-right: 167px;
+    margin-left: 0;
+}
+.ar_body .search input[type="text"] {
+    float: right;
+}
+.ar_body .menu ul {
+    float: right;
+}
+.ar_body .menu ul li:first-child {
+    padding-right: 0px;
+    margin-right: 40px;
+}
+.ar_body .menu > ul > li {
+    float: right;
+    margin-left: 40px;
+}
+.ar_body .note_four {
+    float: right;
+}
+.ar_body .menu ul li a {
+    float: right;
+    font-size:16px;
+    margin-right:8px;
+}
+.ar_body .top-bar p {
+    padding-right: 227px;
+    text-align:center;
+    font-size:12px;
+}
+
+.ar_body .myaccount-menu ul {
+    width: 85%;
+    float: left;
+    padding-left: 10px;
+    height: 100%;
+}
+.ar_body .my-title{
+    font-size:20px;
+}
+.ar_body .profile_title{
+    font-size:20px;
+}
+
+/*========================== End Header ===========================*/
+
+/*========================== Homepage =============================*/
+.ar_body .top-designer h1.home-top-designer {
+    background: url("../images/top_designer_ar.png") no-repeat;
+}
+.ar_body .latest_trends h1.home-latest-trends{
+    background: url("../images/latest_trends_ar.png") no-repeat;
+}
+.ar_body .editor_picks h1.home-editor-picks{
+    background: url("../images/editor_picks_ar.png") no-repeat;
+}
+.ar_body .categories .home-categories{
+    background: url("../images/categories_ar.png") no-repeat;
+}
+.ar_body .bxslider > li{
+    float: right !important;
+}
+.ar_body .left_luxury {
+    float: right;
+    margin-right: 15px;
+}
+.ar_body .shop {
+    padding-right: 317px;
+}
+.ar_body .latest_trends {
+    float: right;
+    margin-right: 16px;
+    margin-left: 0;
+}
+.ar_body .sell-item {
+    float: right;
+    margin-right: 20px;
+}
+.ar_body .sell_header p {
+    padding: 6px 521px 0 0;
+}
+.ar_body .submit_item {
+    float: right;
+    margin-right: 145px;
+    margin-left: 0;
+}
+.ar_body .sell_item {
+    float: right;
+    margin-right: 96px;
+    margin-left: 0;
+}
+.ar_body .button_sell button {
+    float: right;
+    margin-right: 462px;
+}
+.ar_body .input-price {
+  margin: 0 -6px 0 0;
+}
+.ar_body .luxury_closet {
+    margin-right: 287px;
+}
+.ar_body .social_icons {
+    margin-right: 488px;
+    margin-left: 0;
+}
+.ar_body .social_icons img {
+    padding-left: 50px;
+    padding-right: 0;
+}
+.ar_body .first {
+    float: right;
+    margin-right: 5px;
+    margin-left: 0;
+}
+.ar_body .second {
+    float: right;
+    margin-right: 5px;
+    margin-left: 0;
+}
+.ar_body .third {
+    float: right;
+    margin-right: 170px;
+    margin-left: 0;
+}
+.ar_body .fourth {
+    float: right;
+    margin-right: 100px;
+    margin-left: 0;
+    padding-right:70px;
+}
+.ar_body .categories .bx-wrapper {
+    float: right;
+}
+.ar_body .bx-wrapper .bx-viewport{
+    direction: ltr;
+}
+.ar_body .categories .bx-prev {
+    display: block;
+}
+.ar_body .categories .bx-next {
+    display: none;
+}
+.ar_body .login-link{
+    margin-left:15px;
+}
+/*========================== End Homepage ==========================*/
+/*========================== Begin Footer ==========================*/
+/*========================== End Footer ==========================*/
+/*========================== Begin Login/Register Popup ==========================*/
+.ar_body .items_lux{
+    padding: 38px 61px 0;
+}
+.ar_body .cross_img {
+    float: left;
+    margin-left: 10px;
+}
+.ar_body .items_lux h1 {
+    float: right;
+}
+.ar_body .items_lux > h2, .ar_body label, .ar_body .items_lux h3 {
+    float: right;
+}
+.ar_body .popup-div-register .items_lux h2 {
+    margin: 0 132px 0 0;
+}
+.ar_body  .popup-div-register label {
+    float: right;
+    margin: 29px 5% 10px;
+    padding-right: 103px;
+
+}
+.ar_body .items_lux input {
+    margin-left: 0;
+    margin-right: 35px;
+    padding-right: 10px;
+    padding-left: 0;
+}
+.ar_body .items_lux > h3 {
+    margin-left: 0;
+    margin-right: 152px;
+}
+.ar_body .items_lux > h3::before, .ar_body #login-form h3::before {
+    right: -19%;
+}
+.ar_body .items_lux > h3::after, .ar_body #login-form h3::after {
+    right: 12%;
+}
+.ar_body #login-form h3{
+    float: right;
+}
+
+.ar_body .facebook {
+    float: right;
+}
+.ar_body .face_div1 {
+    float: right;
+    margin-left: 0;
+    margin-right: 35px;
+}
+.ar_body .face_div1 img {
+    float: right;
+}
+.ar_body .face_div1 p {
+    float: right;
+    padding: 10px 0 8px;
+}
+.ar_body .yet {
+    margin-left: 0;
+    margin-right: 85px;
+}
+
+.ar_body .new_auth {
+    margin-left: 0;
+    margin-right: 27px;
+}
+.ar_body .items_lux > h2 {
+    margin-left: 0;
+    margin-right: 13%;
+}
+.ar_body .remembr {
+    float: right;
+    margin-left: 0;
+    margin-right: 6px;
+}
+.ar_body .remembr .unused {
+    float: right;
+}
+.ar_body .remembr .label_div {
+    float: right;
+}
+.ar_body .remembr .forgot-link {
+    float: right;
+    margin-left: 0;
+    margin-right: -45px;
+}
+.ar_body .remembr .unused {
+    float: right;
+    margin-right: 35px;
+}
+.ar_body .remembr .unused .squaredOne {
+    margin-left: 0;
+    margin-right: 0;
+}
+.ar_body .popup-div-gender .enter_pass{
+    float:right;
+    margin-right:27%;
+}
+.ar_body .rember_gender{
+    padding:3% 16%;
+}
+.ar_body .popup-div-gender .change-email{
+    margin-right:25%;
+}
+/*========================== End Login/Register Popup ==========================*/
+/*========================== Begin MPP ==========================*/
+.ar_body .right_sidebar {
+    float: right;
+}
+.ar_body .right_content {
+    float: right;
+    margin-left: 0;
+    margin-right: 49px;
+}
+.ar_body .item_filter h1::before {
+    left: 18.5%;
+}
+.ar_body .item_filter h1::after {
+    right: 18.5%;
+}
+.ar_body .category_clear {
+    float: right;
+}
+.ar_body .category_clear > h3 {
+    float: right;
+}
+.ar_body .category_clear > p {
+    float: left;
+    margin-left:15px;
+}
+.ar_body div[class*="square"] {
+    float: right;
+    margin-right: 0;
+}
+.ar_body .sub-category {
+    margin-right: 10px;
+}
+.ar_body .search_brand input[type="text"] {
+    float: right;
+    text-align: right !important;
+}
+.ar_body .f-row.unused {
+    float: right;
+    position: relative;
+    width: 100%;
+}
+.ar_body .menu-bar {
+    float: right;
+}
+.ar_body .extra_menu {
+    float: right;
+    margin-left: 0;
+    margin-right: 22px;
+}
+.ar_body .view_drop {
+    float: right;
+    margin-left: 0;
+    margin-right: 19px;
+}
+.ar_body .view_select {
+    float: right;
+}
+.ar_body .view_heading {
+    float: right;
+}
+.ar_body .view_select1 {
+    float: right;
+}
+.ar_body a img{
+    border: none;
+}
+.ar_body .product-icon {
+    float: right;
+    margin-right:150px;
+}
+.ar_body .range_div {
+    direction: ltr;
+}
+.ar_body .range_div > div {
+    margin-left: 0 !important;
+}
+/*.ar_body .thousand {
+  float: right;
+  margin-left: 16px;
+  margin-right: 0;
+}
+.ar_body .range_input {
+  float: right;
+}
+.ar_body .thousand1 {
+  float: right;
+  margin-left: 0;
+  margin-right: 10px;
+}*/
+.ar_body .editor-product-text p a{
+    font-size:16px;
+}
+.ar_body .search_brand input[type='image']{
+    margin-top:-22px;
+}
+.ar_body .search_brand{
+    margin-left:15px;
+}
+
+
+/*========================== End MPP ==========================*/
+/*========================== Begin Sell ==========================*/
+.ar_body .left_form select.country-phone-list {
+  margin-right: 0;
+}
+.ar_body .right_form.right_side .phone {
+  margin-right: -6px;
+}
+.ar_body .service1 {
+    float: right;
+}
+.ar_body .service1 input {
+    margin-right: 0;
+}
+.ar_body .country-id.valid {
+    margin-left: -6px;
+}
+.ar_body .verticle_line {
+    float: right;
+}
+.ar_body .service1 {
+    float: right;
+}
+.ar_body .service1 input {
+    margin-left: 5px;
+    margin-right: -27px;
+}
+.ar_body .simple1 {
+    float: right;
+}
+.ar_body .grid2 {
+    float: right;
+}
+.ar_body #accordion h3 {
+    text-align: right;
+}
+.ar_body .grid2 > img {
+    margin-left: 0;
+    margin-right: 97px;
+}
+
+.ar_body .form {
+    float: right;
+}
+.ar_body .mobile {
+    float: right;
+}
+.ar_body .thank_youform .mobile > span {
+    float: right;
+}
+.ar_body .left_form {
+    float: right;
+    margin-left: 0;
+    margin-right: 16px;
+}
+.ar_body .left_form select {
+    float: right;
+    margin-left: 0;
+    margin-right: 12px;
+}
+.ar_body .right_form {
+    float: right;
+    margin-left: 0;
+    margin-right: 16px;
+}
+.ar_body .right_form select {
+    float: right;
+}
+.ar_body .form_left {
+    margin-right: 0 !important;
+}
+.ar_body .right_form {
+    float: right;
+    margin-left: 0;
+    margin-right: 16px;
+}
+.ar_body .unused.f-conditions {
+    float: right;
+    width: 100%;
+}
+.ar_body .mobile > h1 {
+    float: right;
+    transform: none;    
+}
+.ar_body .home_section_image_mat {
+    float: left;
+    cursor: pointer;
+    margin-left: 24px;
+}
+.ar_body .image_thumb{
+    float: right;
+}
+.ar_body .thank_youform .image_thumb span.remove {
+  float: left;
+  margin-left: 16px;
+  margin-right: 5px;
+}
+.ar_body .quote input {
+  margin-left: 0;
+  margin-right: 28px;
+}
+/* SELL PAGE */
+.ar_body .row{
+    float: right;
+    width: 100%;
+}
+.ar_body .col-1.cols {
+    float: right;
+    width: 10%;
+}
+.ar_body .col-2.cols {
+    float: right;
+    width: 20%;
+}
+.ar_body .col-3.cols {
+    float: right;
+    width: 30%;
+}
+.ar_body .col-4.cols {
+    float: right;
+    width: 40%;
+}
+.ar_body .col-5.cols {
+    float: right;
+    width: 50%;
+}
+.ar_body .col-6.cols {
+    float: right;
+    width: 60%;
+}
+.ar_body .col-7.cols {
+    float: right;
+    width: 70%;
+}
+.ar_body .col-8.cols {
+    float: right;
+    width: 80%;
+}
+.ar_body .col-9.cols {
+    float: right;
+    width: 90%;
+}
+.ar_body .col-10.cols {
+    float: right;
+    width: 100%;
+}
+.ar_body #form-sell-us.sell-easy select.country-phone-list {
+    float: right;
+    border-left: none;
+    border-right: 1px solid #000;
+}
+.ar_body .hover-button {    
+    float: left;
+}
+.ar_body #form-sell-us.sell-easy .col-5 select, .ar_body #form-sell-us.sell-easy .col-5 input {
+    float: right;
+    text-align: right;
+}
+.ar_body #form-sell-us.sell-easy .col-5:nth-child(2n+2) select, .ar_body #form-sell-us.sell-easy .col-5:nth-child(2n+2) input{
+    float: left;
+}
+.ar_body #form-sell-us.sell-easy .Damier {
+    float: right;
+    text-align: right;
+}
+.ar_body #form-sell-us.sell-easy .row .cols h2 {
+    text-align: right;
+}
+.ar_body #form-sell-us.sell-easy .f-conditions {
+    float: right;
+    text-align: right;
+}
+.ar_body #form-sell-us.sell-easy .sell-item-content .f-conditions .squaredOne-1 {
+    margin-right: 3px;
+}
+.ar_body #form-sell-us.sell-easy .home_section_image_mat.home_mat {
+  display: block;
+  left: 0 !important;
+  right: 70%;
+  top: -35px;
+}
+.ar_body #form-sell-us.sell-easy .another img {
+    float: right;
+    margin: 5px 20px 0 29px;
+}
+.ar_body #form-sell-us.sell-easy .image_thumb {
+    float: right;
+    margin-left: 1%;
+    margin-right: 0;
+}
+.ar_body #form-sell-us.sell-easy .mobile.condition {
+    text-align: right;
+    width: 100%;
+}
+.ar_body #form-sell-us.sell-easy .f-remove-item {
+    float: left;
+    text-align: right;
+}
+/* END SELL PAGE*/
+.ar_body .another img {
+    float: right;
+    margin-left: 20px;
+    margin-right: 29px;
+}
+.ar_body .another p {
+    float: right;
+}
+.ar_body .line {
+    float: right;
+}
+.ar_body .line1 {
+    float: right;
+}
+.ar_body .thank_youform div[class*="square"] {
+    float: right;
+    margin-left: 10px;
+    margin-right: 30px;
+}
+.ar_body .thank_youform label.error{ float: right; margin-right: 30px;}
+/*========================== End Sell ==========================*/
+/*========================== Begin SPP ==========================*/
+.ar_body .menu-bar > p {
+    float: right;
+}
+.ar_body .installment_slider {
+    float: right;
+}
+.ar_body .add_shopping {
+    float: right;
+}
+.ar_body .installment1 {
+    float: right;
+}
+.ar_body .add_shopping1 {
+    float: right;
+}
+.ar_body .installment1 {
+    float: right;
+}
+.ar_body .buy_shopping1 {
+    float: right;
+}
+.ar_body .buy_shopping {
+    float: right;
+}
+.ar_body .crochet h5 {
+    float: right;
+}
+.ar_body .crochet > h3 {
+    float: right;
+    margin: 0 0 0 10px;
+}
+.ar_body .crochet > p {
+    float: right;
+}
+.ar_body .fav {
+    float: right;
+    margin-left: 0;
+    margin-right: 10px;
+}
+.ar_body .fav img {
+    float: right;
+}
+.ar_body .fav h3 {
+    float: right;
+    padding: 0 10px 29px 0;
+}
+.ar_body .stock_div {
+    float: right;
+}
+.ar_body .stock_div > h3 {
+    float: right;
+}
+.ar_body .social_shopping {
+    float: left;
+}
+.ar_body .easy_ways {
+    float: right;
+}
+.ar_body .easy_wys_img > ul {
+    float: right;
+}
+.ar_body .easy_wys_img li {
+    float: right;
+}
+.ar_body .complete_look > h1::before {
+    left: 35.5%;
+}
+.ar_body .complete_look > h1::after {
+    right: 35.5%;
+}
+.ar_body .box-look {
+    float: right;
+}
+.ar_body .completeviewed > h1::before {
+    left: 34.5%;
+}
+.ar_body .completeviewed > h1::after {
+    right: 34.5%;
+}
+.ar_body .installment_slider > div {
+    padding-left: 0 !important;
+    padding-right: 60px !important;
+}
+.ar_body .amazingslider-nav-1 {
+    margin-left: 0 !important;
+    margin-right: -65px !important;
+    right: 0;
+}
+.ar_body .silk > p {
+    float: left;
+    margin-right: 0;
+    margin-left: 17px;
+}
+.ar_body .cart1 {
+    float: right;
+}
+.ar_body .cart_text {
+    margin-left: 0;
+    margin-right: 260px;
+}
+.ar_body .cart_img1 {
+    margin-left: 0;
+    margin-right: 502px;
+}
+.ar_body .cart_text1 {
+    margin-left: 0;
+    margin-right: 520px;
+}
+.ar_body .cart_img2 {
+    margin-left: 0;
+    margin-right: 712px;
+}
+.ar_body .cart_text2 {
+    margin-left: 0;
+    margin-right: 730px;
+}
+/*========================== End SPP ==========================*/
+/*========================== Begin Shopping cart ==========================*/
+.ar_body .cart1 {
+    float: right;
+}
+.ar_body .cart_text {
+    margin-left: 0;
+    margin-right: 260px;
+}
+.ar_body .cart_img1 {
+    margin-left: 0;
+    margin-right: 502px;
+}
+.ar_body .cart_text1 {
+    margin-left: 0;
+    margin-right: 520px;
+}
+.ar_body .cart_img2 {
+    margin-left: 0;
+    margin-right: 712px;
+}
+.ar_body .cart_text2 {
+    margin-left: 0;
+    margin-right: 730px;
+}
+.ar_body .checkout_button {
+    float: right;
+}
+.ar_body .continue {
+    float: left;
+}
+.ar_body .continue > a {
+    float: right;
+    margin-left: 5px;
+}
+.ar_body .list {
+    float: right;
+}
+.ar_body .item > a {
+    float: right;
+}
+.ar_body h5 {
+    float: right;
+}
+.ar_body .item p {
+    float: right;
+}
+.ar_body .whistle {
+    float: right;
+}
+.ar_body .heart_img {
+    float: left;
+}
+.ar_body .heart_img > img {
+    float: right;
+    margin-left: 10px;
+    margin-right: 0;
+}
+.ar_body .whistle p {
+    margin: 2px 0;
+}
+.ar_body .subtotal1 {
+    float: left;
+    text-align: left;
+}
+/*========================== End Shopping cart ==========================*/
+/*========================== Begin Checkout ==========================*/
+.ar_body .confirmation_small {
+    float: right;
+}
+.ar_body .confirmation1 {
+    float: right;
+}
+.ar_body .confirmation2 {
+    float: right;
+    margin-left: 0;
+    margin-right: 16px;
+}
+.ar_body .ui-accordion .ui-accordion-icons {
+    padding-left: 0;
+    padding-right: 2.2em;
+}
+.ar_body .billing_address {
+    float: right;
+}
+.ar_body .line_height {
+    float: right;
+}
+.ar_body .delivery_address {
+    float: right;
+}
+.ar_body .male_class div[class*="square"] {
+    margin-left: 0;
+    margin-right: 10px;
+}
+.ar_body .label_div {
+    float: right;
+    margin-left: 0;
+    margin-right: 10px;
+}
+.ar_body .confirmation1 .ui-accordion .ui-accordion-content {
+    padding: 22px 23px 0 0 !important;
+}
+.ar_body .payment_section {
+    float: right;
+}
+.ar_body .delivery_div_hover {
+    float: right;
+}
+.ar_body .delivery_div_hover > h1 {
+    float: right;
+    margin-left: 0;
+    margin-right: -155px;
+}
+.ar_body .line_main1 {
+    margin-left: 0;
+    margin-right: -146px;
+}
+.ar_body .vertical_line1 {
+    margin-left: 0;
+    margin-right: -16px;
+}
+.ar_body .delivery_section p {
+    float: right;
+    margin-left: 0;
+}
+.ar_body .pickup_div_hover {
+    float: right;
+}
+.ar_body .pickup_div_hover {
+    float: right;
+}
+.ar_body .pickup_div_hover > h1 {
+    float: right;
+    margin-left: 0;
+    margin-right: -166px;
+}
+.ar_body .line_main {
+    margin-left: 0;
+    margin-right: -159px;
+}
+.ar_body .vertical_line {
+    margin-left: 0;
+    margin-right: -16px;
+}
+.ar_body #orderbilling-country_id {
+    float: right;
+}
+.ar_body #billing_delivery_section .conditions_div div[class*="squared"] {
+    margin-left: 0;
+}
+.ar_body .payment_section {
+    float: right;
+}
+.ar_body .payment_section_div {
+    float: right;
+}
+.ar_body .payment_section_div > div {
+    float: right;
+    width: 100%;
+}
+.ar_body .payment_section .f-payment-div-hover {
+    float: right;
+}
+.ar_body .payment_div_hover h1 {
+    float: right;
+    margin-left: 0;
+    margin-right: -124px;
+}
+.ar_body .line_main2 {
+    margin-left: 0;
+    margin-right: -114px;
+}
+.ar_body .vertical_line2 {
+    margin-left: 0;
+    margin-right: -16px;
+}
+.ar_body .payment_div_hover1 h1 {
+    float: right;
+    margin-left: 0;
+    margin-right: -125px;
+}
+.ar_body .line_main3 {
+    margin-left: 0;
+    margin-right: -115px;
+}
+.ar_body .vertical_line3 {
+    margin-left: 0;
+    margin-right: -15px;
+}
+.ar_body .payment_section .payment_div_hover2 h1 {
+    margin-right: -91px;
+}
+.ar_body .payment_section .payment_div_hover3 h1 {
+    float: right;
+    margin-left: 0;
+    margin-right: -73px;
+}
+.ar_body .payment_section .line_main4 {
+    margin-left: 0;
+    margin-right: -83px;
+}
+.ar_body .vertical_line4 {
+    margin-left: 0;
+    margin-right: -16px;
+}
+.ar_body .payment_section .line_main5 {
+    float: right;
+    margin-left: 0;
+    margin-right: -64px;
+}
+.ar_body .payment_section .vertical_line5 {
+    float: right;
+    margin-left: 0;
+    margin-right: -16px;
+}
+
+.ar_body .confirmation_button {
+    float: right;
+}
+.ar_body .voucher {
+    float: right;
+}
+.ar_body .voucher > input {
+    float: right;
+}
+.ar_body .voucher > input[type="button"] {
+    margin-left: 0;
+    margin-right: 6px;
+}
+.ar_body .place_order {
+    float: right;
+}
+.ar_body .place_order1 {
+    float: right;
+    margin-right: 6px;
+}
+.ar_body .aa {
+    float: right;
+}
+.ar_body .ee {
+    float: right;
+}
+.ar_body .nexus {
+    float: right;
+}
+.ar_body .area {
+    float: right;
+}
+.ar_body .ff {
+    float: right;
+}
+.ar_body .hh {
+    float: right;
+}
+.ar_body .hh > img {
+    float: left;
+    margin-left: -12px;
+    margin-right: 0;
+}
+.ar_body h5 {
+    float: right;
+}
+.hh > p {
+    float: right;
+}
+.ar_body .hh p span {
+    float: left;
+    margin-left: -11px;
+    margin-right: 0;
+}
+.ar_body .sepe input {
+    float: right;
+}
+.ar_body .sepe a {
+    float: right;
+    margin-right: 10px;
+}
+.ar_body .subtotal {
+    float: left;
+    margin-left: 10px;
+    text-align: left;
+}
+.ar_body .learn_more {
+    float: left;
+    margin-left: 10px;
+}
+.ar_body .learn_more > h3 {
+    float: left;
+}
+.ar_body .sign_in {
+    float: right;
+}
+.ar_body .ins_address1 {
+    float: right;
+}
+.ar_body .ins_address2 {
+    float: right;
+}
+.ar_body .ins_address1 > span {
+    float: right;
+}
+.ar_body .cont .total_ins {
+    float: right;
+}
+.ar_body .cont > p {
+    float: right;
+}
+.ar_body .continue_price {
+    float: right;
+}
+.ar_body .ins_address2 span p {
+    float: right;
+}
+.ar_body .cont1 p {
+    float: right;
+}
+/*========================== End Checkout ==========================*/
+/*========================== Begin My Account ==========================*/
+.ar_body select{
+    background-position: 5px 50%;
+}
+.ar_body .myaccount {
+    margin-left: 6%;
+    margin-right: 15%;
+}
+.ar_body .cart-header {
+    margin-right: -4%;
+}
+.ar_body .myaccount-menu{
+    margin-right:-50px;
+}
+.ar_body .myaccount-menu ul li{
+    padding: 23px 20px 0 0;
+}
+.ar_body .upper-header .myaccount .cart span{
+    margin-left:18px;
+}
+.ar_body .profile {
+    float: right;
+}
+.ar_body .box {
+    float: right;
+}
+.ar_body .lb_colum {
+    float: right;
+    text-align: right;
+}
+.ar_body .place2 {
+    padding-left: 104px;
+    padding-right: 0;
+}
+.ar_body .lb_address {
+    padding-left: 120px;
+    padding-right: 0;
+}
+.ar_body .country_id {
+    float: right;
+    margin-left: 0;
+    margin-right: 4px;
+}
+.ar_body .ip_column > input[type="radio"] {
+    float: right;
+}
+.ar_body .appear {
+    float: right;
+}
+.ar_body .appear > span {
+    float: right;
+    margin-left: 25px;
+    margin-right: 54px;
+}
+.ar_body .appear h2 {
+    float: right;
+}
+.ar_body .watch_image {
+    float: right;
+}
+.ar_body .tory {
+    float: right;
+}
+.ar_body .watch_text {
+    float: left;
+}
+.ar_body .item_appear {
+    float: left;
+}
+.ar_body .item_appear > p {
+    float: right;
+}
+.ar_body .item_appear > span {
+    float: right;
+}
+.ar_body .submitted_item .payout {
+    float: right;
+}
+.ar_body .select_payout {
+    float: right;
+}
+.ar_body .approove {
+    float: right;
+    margin-right: 15px;
+}
+.ar_body .sale_cancel {
+    float: right;
+    margin-left: 9px;
+    margin-right: 70px;
+    margin-top:67px;
+}
+.ar_body .dollar_zero {
+    float: right;
+    text-align: right;
+    margin-top:65px;
+}
+.ar_body .save_new {
+    float: right;
+    margin-left: 0px;
+    margin-right: 11px;
+}
+.ar_body .reduce_new {
+    float: right;
+    margin-left: 0;
+    margin-right: 249px;
+}
+.ar_body .mark {
+    float: right;
+    margin-left: 0;
+    margin-right: 5px;
+}
+.ar_body .tory span {
+    float: right;
+}
+.ar_body select{
+    background-position-x:10%;
+}
+/* Purchase */
+
+.ar_body .installment_div {
+    float: right;
+}
+.ar_body .installment_order {
+    float: right;
+    padding: 10px 26px 12px 0;
+}
+.ar_body .purchase_item-wrapper {
+    float: right;
+}
+.ar_body .installment_div .purchase-row .purchase_item-wrapper > div {
+    float: right;
+}
+.ar_body .input-wrapper {
+    float: right;
+    margin-left: 10px;
+    margin-right: 30px;
+}
+.ar_body .item_img1 {
+    float: right;
+}
+.ar_body .purse_info_wrapper h5 {
+    float: right;
+}
+.ar_body .pur_name {
+    float: right;
+}
+.ar_body .pur_name > h3 {
+    float: right;
+}
+.ar_body .pur_name > p {
+    float: right;
+}
+.ar_body .pur_order_info {
+    float: right;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+.ar_body .pur_order_info > h3 {
+    float: right;
+}
+.ar_body .pur_order_info > p {
+    float: right;
+}
+.ar_body .balance {
+    float: right;
+}
+.ar_body .balance h4 {
+    float: right;
+}
+.ar_body .balance > p {
+    float: right;
+    width: auto;
+    margin-right: 5px;
+}
+.ar_body .remaing_div {
+    float: right;
+}
+.ar_body .make_a_payment {
+    float: right;
+}
+.ar_body .pur_complete_order {
+    float: right;
+}
+.ar_body .show_details {
+    float: left;
+}
+.ar_body .purchase_item {
+    float: right;
+}
+.ar_body .slecte {
+    float: right;
+}
+.ar_body .completed_selected {
+    float: right;
+    margin-left: 0;
+    margin-right: 30px;
+}
+.ar_body .slecte > p {
+    float: left;
+}
+.ar_body .pur_img {
+    float: right;
+}
+.ar_body .purse_info_wrapper {
+    float: right;
+}
+.ar_body .pur_order_info > p {
+    float: right;
+}
+.ar_body .purchased_div {
+    float: left;
+}
+.ar_body .show_details {
+    float: left;
+}
+.ar_body .purchase_item1 {
+    float: right;
+}
+.ar_body .purchase_table > ul {
+    float: right;
+}
+.ar_body .purchase_table li {
+    float: right;
+}
+.ar_body .purchase_table1 > ul {
+    float: right;
+}
+.ar_body .purchase_table1 li {
+    float: right;
+    text-align: right;
+}
+/* Wish list */
+.ar_body .item1 {
+    float: right;
+}
+.ar_body .item1 > span {
+    float: right;
+    margin-left: 86px;
+    margin-right: 0;
+}
+.ar_body .dil {
+    float: right;
+}
+.ar_body .whole_text2 {
+    float: right;
+}
+.ar_body .whole_text2 h3 {
+    float: right;
+}
+.ar_body .whole_text2 > p {
+    float: right;
+}
+.ar_body .whistle1 {
+    float: right;
+}
+.ar_body .heart_img1 {
+    float: left;
+}
+.ar_body .whistle1 img {
+    float: right;
+}
+/* Notifications */
+.ar_body .notification_list, .ar_body .notification_list1, .ar_body .notification_list2, .ar_body .notification_list3, .ar_body .notification_list4{
+    float: right;
+}
+.ar_body .note_first, .ar_body .note_second, .ar_body .note_third{
+    float: right;
+}
+.ar_body .dream h3 {
+    /*float: right;*/
+}
+.ar_body .note_first h3, .ar_body .note_second h3, .ar_body .note_third h3{
+    text-align: right !important;
+}
+.ar_body .notification_list ul, .ar_body .notification_list1 ul, .ar_body .notification_list2 ul, .ar_body .notification_list3 ul{
+    float: right;
+}
+.ar_body .payment-ready-wrapper h4, .payment-not-ready-wrapper h4{
+    padding-right:95px;
+}
+/*========================== End My Account ==========================*/
+/*========================== Begin Static Pages ==========================*/
+/*Authentication*/
+.ar_body .ui-tabs .ui-tabs-nav li {
+    float: right;
+}
+.ar_body .authentic {
+    float: right;
+}
+.ar_body .image_auth {
+    float: right;
+}
+.ar_body .text {
+    float: left;
+}
+.ar_body .authentic1 {
+    float: right;
+}
+.ar_body .authen {
+    float: right;
+}
+.ar_body .authen1 {
+    float: right;
+}
+.ar_body .sno {
+    float: right;
+}
+.ar_body .authen1_p {
+    float: right;
+}
+.ar_body .right_trust {
+    float: right;
+}
+.ar_body .authen3_p {
+    float: right;
+}
+.ar_body .fake1 {
+    float: right;
+    margin-left: 35px;
+    margin-right: 0;
+}
+.ar_body .fake1 > p {
+    float: right;
+}
+.ar_body .authenticity_slider {
+    float: right;
+}
+/* Careers */
+.ar_body .career_div > h1 {
+    float: right;
+}
+.ar_body .career_div > ul {
+    float: right;
+    margin-left: 0;
+    margin-right: 16px;
+}
+.ar_body .career_div > h3 {
+    float: right;
+    width: 100%;
+}
+.ar_body .career_div > h3 span {
+    float: right;
+    margin-left: 10px;
+}
+.ar_body .career_form .left_form {
+    margin-right: 0;
+}
+.ar_body .career_form .left_form select {
+    margin-right: 0;
+}
+.ar_body .career_div .career_form .home_section_image_mat.home_mat {
+    float: right;
+}
+.ar_body .no_file {
+    float: right;
+    padding-left: 0;
+    padding-right: 10px;
+}
+/* FAQs */
+.ar_body .asked {
+    float: right;
+}
+.ar_body .asked ul {
+    float: right;
+}
+.ar_body .a_note > strong {
+    float: right;
+}
+.ar_body .text_img {
+    float: right;
+}
+.ar_body .image2 {
+    float: right;
+}
+/* Who Are We */
+.ar_body .who_top {
+    float: right;
+}
+.ar_body .top_left {
+    float: right;
+    margin-left: 44px;
+    margin-right: 0;
+}
+.ar_body .top_right {
+    float: right;
+}
+.ar_body .img_team {
+    float: right;
+}
+.ar_body .middle {
+    float: right;
+}
+.ar_body .middle_row {
+    float: right;
+}
+.ar_body .img_team {
+    float: right;
+}
+.ar_body .desire {
+    float: right;
+}
+.ar_body .desire_text {
+    float: right;
+}
+.ar_body .desire_image {
+    float: right;
+}
+.ar_body .form1 {
+    float: right;
+    margin-left: 0;
+    margin-right: 19px;
+}
+.ar_body .form2 {
+    float: right;
+    margin-right: 10px;
+}
+.ar_body .form2 textarea {
+    float: right;
+    width: 97%;
+    padding: 8px 7px 72px 0;
+}
+.ar_body .form2 > input {
+    float: right;
+    width: 100%;
+}
+.ar_body .full_width {
+    float: right;
+}
+.ar_body .number {
+    float: right;
+}
+.ar_body .ingo_site {
+    float: right;
+    margin-left: 0;
+    margin-right: 50px;
+}
+/* Term and Conditions */
+.ar_body .career_div ul {
+    float: right;
+    padding-left: 0;
+    padding-right: 16px;
+}
+.ar_body .nav-msg{
+    margin-right:328px;
+}
+/*=========================== End Static Pages ===========================*/

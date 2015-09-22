@@ -1,0 +1,53 @@
+{% if app.user.isGuest %}
+  {{ use('yii/widgets/ActiveForm') }}
+  {{ use('app/assets/LoginAsset') }}
+  {{ register_login_asset() }}
+
+  {# Login form #}
+  {% set form = active_form_begin ({
+      'id' : 'login-form',
+      'options' : {'class' : 'popup-div'},
+      'enableClientScript' : false,
+      'action' : ['site/login']
+    })
+  %}
+    <div class="body-popup">
+      <div class="pop-up-div">
+        <img src="{{ app.homeUrl() }}images/img11.png" class="cross_img cross_img_login">
+        <div class="items_lux">
+          <img src="{{ app.homeUrl() }}images/login-img1.png" >
+         
+          <p class="new_auth">{{ yii_t('app', 'AUTHENTICATED NEW & PRE-OWNED LUXURY ITEMS')  }}</p>
+          <h2>{{ yii_t('app', 'LOGIN TO YOUR ACCOUNT') }}</h2>
+          <input type="email" name="LoginForm[username]" class="user-email" autocomplete="off" placeholder="{{ yii_t('app', 'E-MAIL ADDRESS') }}">
+          <input type="password" name="LoginForm[password]" class="user-pwd" autocomplete="off" placeholder="{{ yii_t('app', 'PASSWORD') }}">
+          
+          <div class="remembr">
+            <div class="unused">
+              <div class="squaredOne">
+                <input name="LoginForm[rememberMe]" id="squaredOne" class="user-remember" autocomplete="off" type="checkbox" value="0">
+                <label class="remember-label" for="squaredOne"></label>
+              </div>
+              <div class="label_div">{{ yii_t('app', 'remember me') }}</div>
+            </div>
+            <div class="forgot-link">
+              <a class="forgot-pass-link">{{ yii_t('app', 'Forgot Your Password?') }}</a>
+            </div>
+          </div>
+          <input type="submit" class="login_button" id="login_btn" value="LOGIN">
+          <div class="action-loading"><img src="{{ app.homeUrl() }}images/loading-ajax.gif"></div>
+          <h3>or</h3>
+
+          {# Login form via facebook account #}
+          <div class="facebook">
+              <div class="face_div1 login_fb_btn" style="cursor: pointer;">
+                <img src="{{ app.homeUrl() }}images/face-tab.png">
+                <p>{{ yii_t('app', 'login with facebook') }}</p>
+              </div>
+          </div>
+          <p class="yet">{{ yii_t('app', 'NOT YET A MEMBER?') }} <strong><a href="#" class="popup-register">{{ yii_t('app', 'REGISTER HERE') }}</a></strong></p>
+        </div>
+      </div>
+    </div>
+  {{ active_form_end() }}
+  {% endif %}

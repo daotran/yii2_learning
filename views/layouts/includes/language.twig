@@ -1,0 +1,132 @@
+{# 
+Purpose   : Saving language messages which are used in JS
+Structure : messages['message_type.function_name.message_name'] = 'message value';
+            message_type : can be "info" or "error"
+            function_name : name of function (ex: login, register ...)
+ #}
+<script type="text/javascript">
+  messages = new Array();
+  messages['field.required'] = '{{ yii_t("app","This field is required.") }}';
+  messages['field.invalid.phone.number'] = '{{ yii_t("app","Invalid phone number.") }}';
+  messages['field.number.not.permitted'] = '{{ yii_t("app","Number is not permitted.") }}';
+  messages['field.min.length.6'] = '{{ yii_t("app","Please enter at least 6 characters.") }}';
+  messages['field.equal.to'] = '{{ yii_t("app","Confirm password is incorrect.") }}';
+
+  /**********************************************************************************************************/
+  /* INFO */
+  /**********************************************************************************************************/
+  // Registration
+  messages['info.register.sale_title'] = '{{ yii_t("app","and get exclusive access to all sale items") }}';
+  messages['info.register.whatnew_title'] = '{{ yii_t("app","and get access to our latest items before everybody else") }}';
+  messages['info.register.notifyme'] = '{{ yii_t("app","to receive your notifications") }}';
+  messages['info.register.submission'] = '{{ yii_t("app","to submit your items for sale") }}';
+  messages['info.register.add_to_wishlist'] = '{{ yii_t("app","to remember your favourite items and share your wishlist with your friends") }}';
+  messages['info.register.normal_title'] = '{{ yii_t("app","Get exclusive access to sales, discounts, Notifications & the latest trends!") }}';
+  messages['info.register.success'] = '{{ yii_t("app","Thank you for registering! A confirmation e-mail has been sent to ") }}';
+  messages['info.fb_login.message'] = '{{ yii_t("app", "We were unable to retrieve your email address from Facebook. Please enter your email address to login/register.") }}';
+  
+  // Forgot Password
+  // after clicking "Change Password" button
+  messages['info.forgotpass.submit'] = '{{ yii_t("app","Please check your e-mail to set your new password.") }}';
+  messages['info.forgotpass.not_registered_email'] = '{{ yii_t("app","This e-mail address is not registered.") }}';
+
+
+  /**********************************************************************************************************/
+  /* ERROR */
+  /**********************************************************************************************************/
+  // Registration
+  messages['error.register.enter.email'] = '{{ yii_t("app","Please enter your email.") }}';
+  messages['error.register.enter.password'] = '{{ yii_t("app","Please enter your password.") }}';
+  messages['error.register.select.gender'] = '{{ yii_t("app","Please select your gender.") }}';
+
+  // Login
+  messages['error.login.wrong_pass'] = '{{ yii_t("app","The password you entered for <email> is incorrect.") }}';
+  messages['error.login.not_registered_email'] = '{{ yii_t("app","This e-mail address is not registered.") }}';
+  messages['error.login.missing_email_pass'] = '{{ yii_t("app","Please enter your e-mail address and password.") }}';
+  messages['error.login.can_not_login'] = '{{ yii_t("app","Password is not correct. Please re-type.") }}';
+
+  // My Items
+  messages['error.missing_payout_value'] = '{{ yii_t("app","Please enter price.") }}';
+  messages['error.payout_not_in_range'] = '{{ yii_t("app","Price should be in range.") }}';
+  messages['error.payout_not_a_number'] = '{{ yii_t("app","Price should be a number.") }}';
+  messages['error.can_not_save_payout'] = '{{ yii_t("app","There was an error when saving payout. Please try again!") }}';
+  messages['error.missing_reduced_payout'] = '{{ yii_t("app","Please enter reduced payout.") }}';
+  messages['error.new_payout_out_of_range'] = '{{ yii_t("app","Payout reduction can not be smaller than 5% OR greater than 50%.") }}';
+    // Submmitted items section
+  messages['help.submitted_items.title'] = '{{ yii_t("app", "Submitted Items") }}';
+  messages['help.submitted_items.content'] = '{{ yii_t("app", "You can view and edit all of your submitted items here. A quotation has not yet been made for these items by the Luxury Closet team. Once a quotation is ready, the item will appear in the ‘Select Your Payout’ section.") }}';
+    // Selected Your Payout section
+  messages['help.select_payout.title'] = '{{ yii_t("app", "Select your payout") }}';
+  messages['help.select_payout.content'] = '{{ yii_t("app", "You can select your payout here. Your payout is the amount that you will receive after your item sells. Choose an amount in between the payout range provided and then click approve. Please enter the amount without any special characters eg. , . ‘") }}';
+  messages['help.select_payout.examples.title'] = '{{ yii_t("app", "Examples") }}';
+  messages['help.select_payout.examples.your_payout'] = '{{ yii_t("app", "Your Payout") }}';
+  messages['help.select_payout.examples.select_payout'] = '{{ yii_t("app", "Select Payout") }}';
+  messages['help.select_payout.examples.error.payout_outsite'] = '{{ yii_t("app", "Payout is outside the range") }}';
+  messages['help.select_payout.examples.error.payout_contains'] = '{{ yii_t("app", "Payout contains comma") }}';
+    // Awaiting Pickup section
+  messages['help.awaiting_pickup.title'] = '{{ yii_t("app", "Awaiting Pickup") }}';
+  messages['help.awaiting_pickup.content'] = '{{ yii_t("app", "These items will go on sale as soon as they are received by us. Our team will contact you to arrange your pickup and will notify you once we have received your item(s).") }}';
+    // Your items on sale section
+  messages['help.on_sale.title'] = '{{ yii_t("app", "Your Items on sale") }}';
+  messages['help.on_sale.content'] = '{{ yii_t("app", "These items are on sale. Your payout is the price that you will receive once your item sells, and the selling price is the amount it will sell for on the Luxury Closet. You can reduce your payout by clicking on the ‘Reduce your payout’ button.") }}';
+    // Intro Reducing Payout
+  messages['help.reducing payout.title'] = '{{ yii_t("app", "Reducing Your Payout") }}';
+  messages['help.reducing payout.content_condition_1'] = '{{ yii_t("app", "You can reduce your price by a minimum of 5% and a maximum of 50%.") }}';
+  messages['help.reducing payout.content_condition_2'] = '{{ yii_t("app", "Reducing your payout will also reduce the selling price of your item.") }}';
+  messages['help.reducing payout.content_condition_3'] = '{{ yii_t("app", "Reducing the price may lead to your item selling faster.") }}';
+  messages['help.reducing payout.make_mistake'] = '{{ yii_t("app", "Make a mistake? Call us on 800 LUX (+971 800 589) or email us on") }}';
+    // Unpaid items help
+  messages['help.unpaid_items.title'] = '{{ yii_t("app", "Unpaid Items") }}';
+  messages['help.unpaid_items.content.items_sold'] = '{{ yii_t("app", "These are all of your items that have been sold.") }}';
+  messages['help.unpaid_items.content.payment_ready'] = '{{ yii_t("app", "Payment ready:") }}';
+  messages['help.unpaid_items.content.payment_ready_desc'] = '{{ yii_t("app", "These are the items you can request payment for.") }}';
+  messages['help.unpaid_items.content.payment_not_ready'] = '{{ yii_t("app", "Payment not ready:") }}';
+  messages['help.unpaid_items.content.payment_not_ready_desc'] = '{{ yii_t("app", "These are items that you cannot request payment for yet. There may be several reasons for this:") }}';
+  messages['help.unpaid_items.content.payment_not_ready.reason_1'] = '{{ yii_t("app", "The item was delivered to the buyer less than 3 days ago and so it can still be returned to the Luxury Closet") }}';
+  messages['help.unpaid_items.content.payment_not_ready.reason_2'] = '{{ yii_t("app", "The item was ordered,but not yet paid for by the buyer (it may have been ordered on Cash On Delivery, for example)") }}';
+  messages['help.unpaid_items.content.payment_not_ready.condition'] = '{{ yii_t("app", "Most items move from \"payment not ready\" to \"payment ready\" within 7 business days.") }}';
+    // Paid items help
+  messages['help.paid_items.title'] = '{{ yii_t("app", "Paid Items") }}';
+  messages['help.paid_items.content'] = '{{ yii_t("app", "These are all of your sold items for which payment has been made.") }}';
+  
+  // My Wishlist
+  messages['confirm.delete_wishlist_item'] = '{{ yii_t("app", "This action can not be undone. Are you sure you want to remove this item?") }}';
+
+  // My Notifications
+  messages['confirm.empty_chosen'] = '{{ yii_t("app", "Please choose category|brand|colour before saving.") }}';
+  messages['confirm.success_saving_notification'] = '{{ yii_t("app", "Your notification has been created.") }}';
+  messages['error.fail_processing_notification'] = '{{ yii_t("app", "Error while processing. Please try again!") }}';
+  messages['error.fail_duplicated_notification'] = '{{ yii_t("app", "Notification alert has already been created. Please try again!") }}';
+  messages['error.empty_notification_input'] = '{{ yii_t("app", "Please fill-in the notification field before hitting this button.") }}';
+  messages['confirm.success_delete_notification'] = '{{ yii_t("app", "Custom notification has been deleted out of Your Notification") }}';
+
+  // My Purchase
+  messages['purchase.title'] = '{{ yii_t("app", "Purchases") }}';
+  messages['purchase.content'] = '{{ yii_t("app", "Instruction content.") }}';
+  
+  // Common
+  messages['error.common.existing_email'] = '{{ yii_t("app","This e-mail address is already registered.") }}';
+  messages['error.common.not_enter_email'] = '{{ yii_t("app","Please enter an e-mail address.") }}';
+  messages['error.common.incorrect_email'] = '{{ yii_t("app","This e-mail address is incorrect.") }}';
+  messages['error.common.not_enter_password'] = '{{ yii_t("app","Please enter a password.") }}';
+
+  // Professional Seller
+  messages['error.enter_your_name'] = '{{ yii_t("app", "Please enter your name") }}';
+  messages['error.enter_your_email'] = '{{ yii_t("app", "Please enter your email") }}';
+  messages['error.enter_your_phone'] = '{{ yii_t("app", "Please enter your phone") }}';
+  messages['error.select_product_cat'] = '{{ yii_t("app", "Please select product category") }}';
+  messages['error.invalid_email'] = '{{ yii_t("app", "Invalid e-mail address.") }}';
+
+
+  messages['filter.result.custome.products-container'] = '{{ yii_t("app", "There are currently no items available for your selection. To get notified when these items are added, use the \'Notify Me\' button on the left.") }}';
+  messages['filter.result.custome.pagingStr.back'] = '{{ yii_t("app", "back") }}';
+  messages['filter.result.custome.pagingStr.next'] = '{{ yii_t("app", "next") }}';
+  messages['filter.result.custome.label_div'] = '{{ yii_t("app", "Price ranger") }}';
+  messages['filter.result.custome.original-price'] = '{{ yii_t("app", "was") }}';
+  messages['filter.result.custome.product_off'] = '{{ yii_t("app", "OFF") }}';
+  messages['sellus.left_form.sell_brands'] = '{{ yii_t("app","SELECT A BRAND") }}';
+  // messages[''] = '{{ yii_t("app","") }}';
+
+  messages['msg.cart.cron.removed'] = '{{ yii_t("app","All product(s) in your cart had been removed!") }}';
+  messages['msg.cart.cron.start.shopping'] = '{{ yii_t("app","Start shopping") }}';
+</script>
